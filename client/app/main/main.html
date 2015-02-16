@@ -1,4 +1,3 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
 
 <header class="hero-unit" id="banner">
   <div class="container">
@@ -6,6 +5,20 @@
     <img src="assets/images/FLM.png" style="height: 160px; width: 140px;" alt="I'm Yeoman">
   </div>
 </header>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1>Palabras</h1>
+      <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="palabras in listaPalabras">
+        <li>
+        <input id="{{palabras.id}}" class="palabras btn btn-default" type="checkbox" value="{{palabras.name}}" ng-checked="selection.indexOf(palabras.name) > -1" ng-click="buscarPatron(palabras.name)"/>
+        <label for="{{palabras.name}}"></label>
+        {{palabras.name}}
+      </ul>
+    </div>
+  </div>
+</div> 
 
 <div class="container">
   <div class="row">
