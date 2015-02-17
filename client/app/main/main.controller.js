@@ -12,7 +12,7 @@ angular.module('killmenos9App')
       {name:"madrid", id:6},
     ];
 
-    $scope.awesomeThings = [];
+    $scope.listaUsuarios = [];
     $scope.selection=[];
 
     $scope.buscarPatron = function buscarPatron(palabras){
@@ -27,8 +27,18 @@ angular.module('killmenos9App')
       buscarTweets($scope.selection);
 
       function buscarTweets(palabras){
-        $http.get('/api/patron/'+palabras).success(function(awesomeThings) {
-          $scope.awesomeThings = awesomeThings;
+        console.log(palabras);
+        $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
+          console.log(listaUsuarios);
+          $scope.listaUsuarios = listaUsuarios;
+          recogerTweets(listaUsuarios)
+        });
+      }
+
+      function recogerTweets(listaUsuarios){
+        $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resultadoAlgoritmo) {
+          console.log(resultadoAlgoritmo);
+          $scope.resultadoAlgoritmo = resultadoAlgoritmo;
         });
       }
     }    

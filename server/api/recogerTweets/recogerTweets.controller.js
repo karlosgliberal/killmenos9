@@ -12,71 +12,36 @@
 var Twit = require('twit');
 var _ = require('lodash');
 var sets = require('simplesets');
-var keys  = {
-  consumer_key: '9LootcW3doB8L3teaj2rLzn0v',
-  consumer_secret: 'DRlc927RbFmavAZnPrlQJEtVhOsOSeuHaJfdYHZu34Uuh3l8Rx',
-  access_token: '3022202798-QZ49mwQ6JjKflV0oc09qxwieHZh8A3DvDz4S3Zx',
-  access_token_secret: 't2l7fags317rA29cmHipmBsd6XV20dPusitI9AKHw5eQ9'
-}
+var config  = require('../../config/killmenos9'); 
 
-var twitter = new Twit(keys);
-var diccionario = ["ultimátum", "bourne", "ojo", "aguja", "vertigo", "sospechosos", "habituales", "uno", "nuestros", "análisis", "final", "dilema", "noche", "nuestra", "nombre", "rosa", "informe", "pelicano", "juego", "hombre", "sabía", "demasiado", "red", "mentiras", "homeland", "alarma", "expreso", "espías", "tres", "días", "cóndor", "servicio", "secreto", "vida", "otros", "misión", "imposible", "prueba", "conspiración", "pánico", "muerte", "talones", "movilizaciones", "visto", "políticas", "asesinos", "agencia", "orgullo", "Secretos", "Plaza", "Castilla", "sufren", "punto" ];
-
+var twitter = new Twit(config.twitter);
+var diccionario = config.diccionario;
 var datos = [];
+var user_id = [];
 
 // Get list of things
 exports.index = function(req, res) {
   console.log(req);
-
-  var params = {
-    q: "pamplona",
-    result_type: "mixed",
-    count: 10,
-    include_entities: true
-  };
-
-  twitter.get('search/tweets', params, function(err, data, resp){
-    var tweets = data.statuses; 
-    var i = 0, len = tweets.length;
-
-    for(i; i < len; i++) {
-      datos.push({"name":tweets[i].user.screen_name});
-    }
-    console.log(datos);
-    res.json(datos);
-  });
-
+  res.json('recoger')
 };
 
 exports.show = function(req, res){
-  var params = {
-    q: req.params.id,
-    result_type: "mixed",
-    count: 10,
-    include_entities: false
-  };
+  var listaUsuarios = req.params.id
+  user_id = listaUsuarios.split(',');
+  var i = 0, len = user_id.length;
+  for(i; i < len; i++) {
+    getUserTweets(user_id[i]);
+  }
 
-  twitter.get('search/tweets', params, function(err, data, resp){
-    var datos = [];
-    var tweets = data.statuses; 
-    var i = 0, len = tweets.length;
-
-    for(i; i < len; i++) {
-      getUserTweets(tweets[i].user.id);
-    }
-    //console.log(datos);
-    //res.json(datos);
-  });
-
-  var getUserTweets = function(user_id){
+   function getUserTweets (user_id){
     twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:20, include_rts:false}, function(err, data, resp){
       var tweets = data;
       var i = 0, len = tweets.length;
       
       for(i; i < len; i++) {
-        // console.log('nombre: ', tweets[i].user.screen_name);
-        // console.log('text: ', tweets[i].text);
-        compararTextDic(tweets[i].text, tweets[i].user.screen_name);
+        console.log('nombre: ', tweets[i].user.screen_name);
+        console.log('text: ', tweets[i].text);
+        //compararTextDic(tweets[i].text, tweets[i].user.screen_name);
       }
     });
   }
