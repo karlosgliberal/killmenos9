@@ -20,7 +20,7 @@ var keys  = {
 }
 
 var twitter = new Twit(keys);
-var diccionario = ["ultimátum", "bourne", "ojo", "aguja", "vertigo", "sospechosos", "habituales", "uno", "nuestros", "análisis", "final", "dilema", "noche", "nuestra", "nombre", "rosa", "informe", "pelicano", "juego", "hombre", "sabía", "demasiado", "red", "mentiras", "homeland", "alarma", "expreso", "espías", "tres", "días", "cóndor", "servicio", "secreto", "vida", "otros", "misión", "imposible", "prueba", "conspiración", "pánico", "muerte", "talones", "movilizaciones", "visto", "políticas", "asesinos", "agencia", "orgullo", "Secretos", "Plaza", "Castilla" ];
+var diccionario = ["ultimátum", "bourne", "ojo", "aguja", "vertigo", "sospechosos", "habituales", "uno", "nuestros", "análisis", "final", "dilema", "noche", "nuestra", "nombre", "rosa", "informe", "pelicano", "juego", "hombre", "sabía", "demasiado", "red", "mentiras", "homeland", "alarma", "expreso", "espías", "tres", "días", "cóndor", "servicio", "secreto", "vida", "otros", "misión", "imposible", "prueba", "conspiración", "pánico", "muerte", "talones", "movilizaciones", "visto", "políticas", "asesinos", "agencia", "orgullo", "Secretos", "Plaza", "Castilla", "sufren", "punto" ];
 
 var datos = [];
 
@@ -31,7 +31,7 @@ exports.index = function(req, res) {
   var params = {
     q: "pamplona",
     result_type: "mixed",
-    count: 3,
+    count: 10,
     include_entities: true
   };
 
@@ -53,7 +53,7 @@ exports.show = function(req, res){
   var params = {
     q: req.params.id,
     result_type: "mixed",
-    count: 3,
+    count: 10,
     include_entities: true
   };
 
@@ -70,7 +70,7 @@ exports.show = function(req, res){
   });
 
   var getUserTweets = function(user_id){
-    twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:4, include_rts:false}, function(err, data, resp){
+    twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:20, include_rts:false}, function(err, data, resp){
       var tweets = data;
 
       var i = 0, len = tweets.length;
@@ -78,7 +78,6 @@ exports.show = function(req, res){
       for(i; i < len; i++) {
         console.log('nombre: ', tweets[i].user.screen_name);
         console.log('text: ', tweets[i].text);
-        datos.push({"name":tweets[i].user.screen_name});
         compararTextDic(tweets[i].text, tweets[i].user.screen_name);
       }
     });
@@ -96,10 +95,11 @@ exports.show = function(req, res){
     if(resultado.length > 1){
       console.log('usuario', screen_name);
       console.log('Mensaje', text);
+      datos.push({"name":screen_name});
       console.log('Intersection:', s1.intersection(s2).array());
       res.json(datos);
     }else{
-      console.log('No hay resulstados');
+      //console.log('No hay resulstados');
     }
   };
 
