@@ -27,39 +27,26 @@ exports.index = function(req, res) {
 
 exports.show = function(req, res){
   var listaUsuarios = req.params.id
-  var usersArray = listaUsuarios.split(','); 
-   // getUserTweets(usersArray, function(err, datos){
-   //   console.log('res', datos);
-   // });
-
-   haceBucle(usersArray, function(err, dat){
-      getUserTweets(dat, function(err, datos){
-        console.log(datos);
-      });
-   })
-
-   function haceBucle(user_id, cb){
-    if (!user_id) cb(null, null);
-    var i = 0, len = user_id.length;
-    for(i; i < len; i++) {
-      cb(null, user_id[i]);
-    }
-   }
+ 
+  console.log(req.params.id);
+  getUserTweets(req.params.id, function(err, datos){
+    console.log('res', datos);
+    res.json(datos);
+  });
 
    function getUserTweets (user_id, cb){
     if (!user_id) cb(null, null);
     var datos = [];
-      twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:2, include_rts:false}, function(err, data, resp){
-        var tweets = data;
-        var v = 0, lens = tweets.length;
-        for(v; v < lens; v++) {
-          // console.log('text: ', tweets[i].text);
-          datos.push(tweets[v].text);
-          //compararTextDic(tweets[i].text, tweets[i].user.screen_name);
-        }
-        cb(null, datos);
-      });
-    
+    twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:2, include_rts:false}, function(err, data, resp){
+      var tweets = data;
+      var i = 0, len = tweets.length;
+      for(i; i < len; i++) {
+        // console.log('text: ', tweets[i].text);
+        datos.push(tweets[i].user.screen_name);
+        //compararTextDic(tweets[i].text, tweets[i].user.screen_name);
+      }
+    cb(null, datos);
+    });
   }
 
   function compararTextDic(text, screen_name){
@@ -78,5 +65,5 @@ exports.show = function(req, res){
       //console.log('No hay resulstados');
     }
   };
-  res.json(datos);
+  //res.json(datos);
 };

@@ -28,7 +28,7 @@ exports.show = function(req, res){
   var params = {
     q: req.params.id,
     result_type: "mixed",
-    count: 6,
+    count: 2,
     lang:"es",
     include_entities: false
   };

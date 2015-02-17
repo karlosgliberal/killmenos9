@@ -14,6 +14,7 @@ angular.module('killmenos9App')
 
     $scope.listaUsuarios = [];
     $scope.selection=[];
+    $scope.resultadoAlgoritmo = [];
 
     $scope.buscarPatron = function buscarPatron(palabras){
       var idx = $scope.selection.indexOf(palabras);
@@ -30,17 +31,23 @@ angular.module('killmenos9App')
         var cajaUser = [];
         $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
           for (var i = listaUsuarios.length - 1; i >= 0; i--) {
-            cajaUser.push(listaUsuarios[i].id);
+            recogerTweets(listaUsuarios[i].id);
           };
-          recogerTweets(cajaUser);
+          //recogerTweets(cajaUser);
           $scope.listaUsuarios = listaUsuarios;
         });
       }
 
       function recogerTweets(listaUsuarios){
-        $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resultadoAlgoritmo) {
-          console.log(resultadoAlgoritmo);
-          $scope.resultadoAlgoritmo = resultadoAlgoritmo;
+
+        $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
+          var idx = $scope.resultadoAlgoritmo.indexOf(resAlgoritmo);
+          if(idx > -1){
+            $scope.resultadoAlgoritmo.splice(idx, 1);
+          }else{
+            $scope.resultadoAlgoritmo.push(resAlgoritmo);
+            console.log($scope.resultadoAlgoritmo);
+          }
         });
       }
     }    
