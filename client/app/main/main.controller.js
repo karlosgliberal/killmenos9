@@ -27,17 +27,19 @@ angular.module('killmenos9App')
       buscarTweets($scope.selection);
 
       function buscarTweets(palabras){
-        console.log('buscar');
+        var cajaUser = [];
         $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
           for (var i = listaUsuarios.length - 1; i >= 0; i--) {
-            recogerTweets(listaUsuarios[i].id);
+            cajaUser.push(listaUsuarios[i].id);
           };
+          recogerTweets(cajaUser);
           $scope.listaUsuarios = listaUsuarios;
         });
       }
 
       function recogerTweets(listaUsuarios){
         $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resultadoAlgoritmo) {
+          console.log(resultadoAlgoritmo);
           $scope.resultadoAlgoritmo = resultadoAlgoritmo;
         });
       }
