@@ -11,6 +11,19 @@
 
 // FUENTES
 
+@font-face {
+    font-family: 'data_control';
+    src: url('/assets/fonts/fontsdata-latin-webfont.eot');
+    src: url('/assets/fonts/data-latin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/data-latin-webfont.woff2') format('woff2'),
+         url('/assets/fonts/data-latin-webfont.woff') format('woff'),
+         url('/assets/fonts/data-latin-webfont.ttf') format('truetype'),
+         url('/assets/fonts/data-latin-webfont.svg#data_controllatin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@data:'data_control';
 
 // DIVIDES
 .divide-pantalla {
@@ -47,12 +60,19 @@ body {
 	margin: 15px 0px;
 	background-color: @red;
 	color: @green;
+	h2 {
+		font-family: @data;
+		color: @green;
+		font-size: 44px;
+		padding: 4px;
+	}
 }
 .header {
 	width: 100%;
 	height: 130px;
 	background-color: @green;
 	margin-top: 5px;
+	padding: 15px;
 } 
 
 
@@ -65,8 +85,10 @@ body {
 	margin: 20px 0px;
 	color:@green;
 	h3 {
-		padding-top: 10px;
-		
+		padding-top: 15px;
+		font-family: @data;
+		font-size: 26px;
+
 	}
 }
 
