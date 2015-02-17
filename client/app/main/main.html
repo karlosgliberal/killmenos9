@@ -23,6 +23,17 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-12">
+      <h1 class="page-header">Usuarios:</h1>
+      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="usuario in listaUsuarios">
+        <li><a href="#" tooltip="{{usuario.info}}">{{usuarios.name}}</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
       <h1 class="page-header">Tweets:</h1>
       <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
         <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>

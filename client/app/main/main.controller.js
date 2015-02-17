@@ -27,7 +27,7 @@ angular.module('killmenos9App')
       buscarTweets($scope.selection);
 
       function buscarTweets(palabras){
-        $http.get('/api/tweets/'+palabras).success(function(awesomeThings) {
+        $http.get('/api/patron/'+palabras).success(function(awesomeThings) {
           $scope.awesomeThings = awesomeThings;
         });
       }

@@ -1,7 +1,7 @@
 'use strict';
 
 var express = require('express');
-var controller = require('./tweets.controller');
+var controller = require('./patron.controller');
 
 var router = express.Router();
 

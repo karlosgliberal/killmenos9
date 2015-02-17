@@ -49,12 +49,11 @@ exports.index = function(req, res) {
 };
 
 exports.show = function(req, res){
-  console.log(req.params);
   var params = {
     q: req.params.id,
     result_type: "mixed",
     count: 10,
-    include_entities: true
+    include_entities: false
   };
 
   twitter.get('search/tweets', params, function(err, data, resp){
@@ -65,19 +64,18 @@ exports.show = function(req, res){
     for(i; i < len; i++) {
       getUserTweets(tweets[i].user.id);
     }
-    console.log(datos);
+    //console.log(datos);
     //res.json(datos);
   });
 
   var getUserTweets = function(user_id){
     twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:20, include_rts:false}, function(err, data, resp){
       var tweets = data;
-
       var i = 0, len = tweets.length;
-
+      
       for(i; i < len; i++) {
-        console.log('nombre: ', tweets[i].user.screen_name);
-        console.log('text: ', tweets[i].text);
+        // console.log('nombre: ', tweets[i].user.screen_name);
+        // console.log('text: ', tweets[i].text);
         compararTextDic(tweets[i].text, tweets[i].user.screen_name);
       }
     });
