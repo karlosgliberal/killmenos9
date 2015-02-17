@@ -28,7 +28,8 @@ exports.show = function(req, res){
   var params = {
     q: req.params.id,
     result_type: "mixed",
-    count: 4,
+    count: 6,
+    lang:"es",
     include_entities: false
   };
 
@@ -37,46 +38,9 @@ exports.show = function(req, res){
     var tweets = data.statuses; 
     var i = 0, len = tweets.length;
     for(i; i < len; i++) {
-      datos.push(tweets[i].user.id);
-      //getUserTweets(tweets[i].user.id);
+      datos.push({id:tweets[i].user.id, img:tweets[i].user.profile_image_url,name:tweets[i].user.screen_name});
     }
     res.json(datos);
-    //console.log(datos);
-    //res.json(datos);
   });
-
-  var getUserTweets = function(user_id){
-    twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:5, include_rts:false}, function(err, data, resp){
-      var tweets = data;
-      var i = 0, len = tweets.length;
-      
-      for(i; i < len; i++) {
-        console.log('nombre: ', tweets[i].user.screen_name);
-        console.log('text: ', tweets[i].text);
-        compararTextDic(tweets[i].text, tweets[i].user.screen_name);
-      }
-    });
-  }
-
-  var compararTextDic = function(text, screen_name){
-    var texto = text.split(' ');
-    var s1 = new sets.Set(texto);
-    var s2 = new sets.Set(diccionario);
-    //console.log(s1);
-
-
-    var resultado =  s1.intersection(s2).array();
-
-    if(resultado.length > 1){
-      console.log('usuario', screen_name);
-      console.log('Mensaje', text);
-      datos.push({"name":screen_name});
-      console.log('Intersection:', s1.intersection(s2).array());
-      res.json(datos);
-    }else{
-      //console.log('No hay resulstados');
-    }
-  };
-
 
 };

@@ -40,18 +40,16 @@ exports.show = function(req, res){
       
       for(i; i < len; i++) {
         console.log('nombre: ', tweets[i].user.screen_name);
-        console.log('text: ', tweets[i].text);
-        //compararTextDic(tweets[i].text, tweets[i].user.screen_name);
+        // console.log('text: ', tweets[i].text);
+        compararTextDic(tweets[i].text, tweets[i].user.screen_name);
       }
     });
   }
 
-  var compararTextDic = function(text, screen_name){
+  function compararTextDic(text, screen_name){
     var texto = text.split(' ');
     var s1 = new sets.Set(texto);
     var s2 = new sets.Set(diccionario);
-    //console.log(s1);
-
 
     var resultado =  s1.intersection(s2).array();
 
