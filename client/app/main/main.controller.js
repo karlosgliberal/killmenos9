@@ -24,7 +24,7 @@ angular.module('killmenos9App')
       } else {
         $scope.selection.push(palabras);
       }
-
+      
       buscarTweets($scope.selection);
 
       function buscarTweets(palabras){
