@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('killmenos9App')
-  .controller('MainCtrl', function ($scope, $http, $timeout) {
+  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval) {
   
     $scope.listaPalabras = [
       {name:'pamplona', id:1},
@@ -16,8 +16,40 @@ angular.module('killmenos9App')
     $scope.selection=[];
     $scope.resultadoAlgoritmo = [];
     $scope.objetivos = [];
+    $scope.porcentaje = 0;
+    
+
+    var stop;
+    $scope.fight = function fight() {
+      // Don't start a new fight if we are already fighting
+      if ( angular.isDefined(stop) ) return;
+
+      stop = $interval(function() {
+        if ($scope.porcentaje != 100) {
+          $scope.porcentaje = $scope.porcentaje + 2;
+        } else {
+          $scope.stopFight();
+        }
+      }, 100);
+    };
+
+    $scope.stopFight = function() {
+      if (angular.isDefined(stop)) {
+        $interval.cancel(stop);
+        stop = undefined;
+      }
+    };
+
+
+    $scope.$on('$destroy', function() {
+      // Make sure that the interval is destroyed too
+      $scope.stopFight();
+    });
 
     $scope.buscarPatron = function buscarPatron(palabras){
+      var timePorcentaje = $timeout(function() {
+        $scope.fight();
+      }, 1500);
       var idx = $scope.selection.indexOf(palabras);
       // is currently selected
       if (idx > -1) {
@@ -25,6 +57,7 @@ angular.module('killmenos9App')
       } else {
         $scope.selection.push(palabras);
       }
+
 
       $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO POSIBLES OBJETIVOS<span>|</span></p>';
       var timeTexto = $timeout(function() {
@@ -37,6 +70,7 @@ angular.module('killmenos9App')
           for (var i = listaUsuarios.length - 1; i >= 0; i--) {
             cajaUser.push(listaUsuarios[i].id);
           };
+          $scope.porcentaje = 100;
           $scope.listaUsuarios = listaUsuarios;
           $scope.textoAlgoritmo = '<p>KILL-9 ALGORITMO ANALIZANDO TWEETS<span>|</span></p>';
           var timeRecoger = $timeout(function() {
@@ -47,6 +81,7 @@ angular.module('killmenos9App')
 
       function recogerTweets(listaUsuarios){
 
+
         $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
           console.log(resAlgoritmo);
           $scope.resultadoAlgoritmo = resAlgoritmo;
@@ -55,8 +90,19 @@ angular.module('killmenos9App')
           if(resAlgoritmo.length == 0){
             console.log('res');
             $scope.textoAlgoritmo = '<p>KILL-9 NO MATCH <span>|</span></p>';
+
+            var timeout = $timeout(function(){
+              $scope.textoAlgoritmo = '<p>KILL-9 REBOOT... <span>|</span></p>';
+            }, 3000);
+
+            var timeout = $timeout(function(){
+              $window.location.reload();
+            }, 6000);
+
           }else{
             $scope.textoObjetivos = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
+            $scope.videoObjeto = '<video width="420" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>';
+
           }
           var timeout = $timeout(function(){
             $scope.objetivos = resAlgoritmo;
