@@ -37,9 +37,11 @@ angular.module('killmenos9App')
           for (var i = listaUsuarios.length - 1; i >= 0; i--) {
             cajaUser.push(listaUsuarios[i].id);
           };
-          recogerTweets(cajaUser);
           $scope.listaUsuarios = listaUsuarios;
-
+          $scope.textoAlgoritmo = '<p>KILL-9 ALGORITMO ANALIZANDO TWEETS<span>|</span></p>';
+          var timeRecoger = $timeout(function() {
+            recogerTweets(cajaUser);
+          }, 3000);
         });
       }
 
@@ -49,6 +51,13 @@ angular.module('killmenos9App')
           console.log(resAlgoritmo);
           $scope.resultadoAlgoritmo = resAlgoritmo;
           $scope.total = resAlgoritmo.length;
+          console.log(resAlgoritmo.length);
+          if(resAlgoritmo.length == 0){
+            console.log('res');
+            $scope.textoAlgoritmo = '<p>KILL-9 NO MATCH <span>|</span></p>';
+          }else{
+            $scope.textoObjetivos = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
+          }
           var timeout = $timeout(function(){
             $scope.objetivos = resAlgoritmo;
           }, 3000);

@@ -33,7 +33,11 @@
        <div class="analizando-datos">
         <div class="titulo-container"><h3>Analizando datos</h3></div>
         <div class="monk"></div>
-          <!-- Objeto twitter -->
+           <!-- Objeto twitter -->
+            <div ng-show="!resultadoAlgoritmo.length" class="intro-uno">
+              <div class="intro-uno" ng-bind-html="textoAlgoritmo"></div>
+            </div>
+
             <div class="media" ng-repeat="res in resultadoAlgoritmo">
               <div class="media-left magictime puffIn">
                   <img class="media-object" src="{{res.img}}">
@@ -52,6 +56,9 @@
         <div class="monk"></div>
       <div class="objetivo-wrapper">
           <!-- Objetivo -->
+            <div ng-show="!objetivos.length" class="intro-uno">
+              <div class="intro-uno" ng-bind-html="textoObjetivos"></div>
+            </div>
             <div class="media" ng-repeat="blanco in objetivos">
               <div class="media-left magictime puffIn">
                   <div class="objetivo-img">
