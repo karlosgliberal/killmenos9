@@ -31,9 +31,9 @@ angular.module('killmenos9App')
         var cajaUser = [];
         $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
           for (var i = listaUsuarios.length - 1; i >= 0; i--) {
-            recogerTweets(listaUsuarios[i].id);
+            cajaUser.push(listaUsuarios[i].id);
           };
-          //recogerTweets(cajaUser);
+          recogerTweets(cajaUser);
           $scope.listaUsuarios = listaUsuarios;
         });
       }
@@ -41,13 +41,7 @@ angular.module('killmenos9App')
       function recogerTweets(listaUsuarios){
 
         $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
-          var idx = $scope.resultadoAlgoritmo.indexOf(resAlgoritmo);
-          if(idx > -1){
-            $scope.resultadoAlgoritmo.splice(idx, 1);
-          }else{
-            $scope.resultadoAlgoritmo.push(resAlgoritmo);
-            console.log($scope.resultadoAlgoritmo);
-          }
+          $scope.resultadoAlgoritmo = resAlgoritmo;
         });
       }
     }    
