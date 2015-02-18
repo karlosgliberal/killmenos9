@@ -68,7 +68,13 @@ exports.show = function(req, res){
       if(resultado.length > 1){
          console.log('text', datos[i].text);
          console.log('Intersection:', s1.intersection(s2).array());
-         paraEnviar.push({name:datos[i].name, id:datos[i].id, text:datos[i].text, img:datos[i].img});
+         var u = 0, lenr = resultado.length;
+         for(u; u < lenr; u++){
+           var span = '<span>'+ resultado[u] +'</span>';
+           var textSpan = frase.replace(resultado[u], span);
+           console.log(textSpan); 
+         }
+         paraEnviar.push({name:datos[i].name, id:datos[i].id, text:textSpan, img:datos[i].img});
       }else{
       }
     }
