@@ -70,7 +70,7 @@ exports.show = function(req, res){
          console.log('Intersection:', s1.intersection(s2).array());
          var u = 0, lenr = resultado.length;
          for(u; u < lenr; u++){
-           var span = '<span>'+ resultado[u] +'</span>';
+           var span = '<span class="seleccionado">'+ resultado[u] +'</span>';
            var textSpan = frase.replace(resultado[u], span);
            console.log(textSpan); 
          }
