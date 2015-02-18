@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" ng-keydown="myFunct($event)">
   <div class="super-container">
     <div class="header"><img src="/assets/images/kill-logo.png"></div>
     <div class="intro"><h2>Seleccion de objetivos<h2></div>
@@ -6,7 +6,7 @@
       <div class="box">
         <div class="titulo-container"><h3>Metadatos</h3></div>
         <div class="monk"></div>
-        <ul class="metadatos" ng-repeat="palabras in listaPalabras" ng-keypress="teclado($event)">
+        <ul class="metadatos" ng-repeat="palabras in listaPalabras">
           <li> 
             <input id="{{palabras.id}}" class="palabras btn btn-default" type="checkbox" value="{{palabras.name}}" ng-checked="selection.indexOf(palabras.name) > -1" ng-click="buscarPatron(palabras.name)"/>
             <label for="{{palabras.name}}"></label>
