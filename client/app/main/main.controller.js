@@ -26,7 +26,10 @@ angular.module('killmenos9App')
         $scope.selection.push(palabras);
       }
 
-      buscarTweets($scope.selection);
+      $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO POSIBLES OBJETIVOS<span>|</span></p>';
+      var timeTexto = $timeout(function() {
+        buscarTweets($scope.selection);
+      }, 3500);  
 
       function buscarTweets(palabras){
         var cajaUser = [];

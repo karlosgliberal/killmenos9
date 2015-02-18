@@ -19,6 +19,9 @@
        <!-- empieza buscando objetivos -->
        <div class="buscando-objetivos">
         <div class="row" >
+            <div ng-show="!listaUsuarios.length" class="intro-uno">
+              <div class="intro-uno" ng-bind-html="textoBuscando"></div>
+            </div>
           <div class="col-md-2" ng-repeat="usuario in listaUsuarios">
              <img id="{{usuario.id}}" src="{{usuario.img}}" class="thumbnail img-objetivos img-responsive magictime puffIn">
           </div>
