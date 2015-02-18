@@ -36,11 +36,16 @@ exports.show = function(req, res){
 
   async.each(users_id,
     function(userId, callback){
-      twitter.get('statuses/user_timeline', {user_id:userId, exclude_replies:true, count:10, include_rts:false}, function(err, data, resp){
+      twitter.get('statuses/user_timeline', {user_id:userId, exclude_replies:true, count:1, include_rts:false}, function(err, data, resp){
         var tweets = data;
         var i = 0, len = tweets.length; 
         for(i; i < len; i++) {
-          datos.push({name:tweets[i].user.screen_name, id:tweets[i].user.screen_name, text:tweets[i].text});
+          datos.push({
+            name:tweets[i].user.screen_name, 
+            id:tweets[i].user.id, 
+            text:tweets[i].text, 
+            img:tweets[i].user.profile_image_url
+          });
         }
         callback();
       })
@@ -53,11 +58,9 @@ exports.show = function(req, res){
   function doSomethingOnceAllAreDone(){
     var paraEnviar = [];
     var i = 0, len = datos.length;
-    console.log(datos);
     var s2 = new sets.Set(diccionario);
 
     for(i; i < len; i++){
-      //console.log(datos[i].text);
       var frase = datos[i].text;
       var texto = frase.split(' ');
       var s1 = new sets.Set(texto);
@@ -65,7 +68,7 @@ exports.show = function(req, res){
       if(resultado.length > 1){
          console.log('text', datos[i].text);
          console.log('Intersection:', s1.intersection(s2).array());
-         paraEnviar.push({name:datos[i].id});
+         paraEnviar.push({name:datos[i].name, id:datos[i].id, text:datos[i].text, img:datos[i].img});
       }else{
       }
     }
@@ -74,44 +77,44 @@ exports.show = function(req, res){
 }
 
 
-exports.show_bak = function(req, res){
-  var listaUsuarios = req.params.id
+// exports.show_bak = function(req, res){
+//   var listaUsuarios = req.params.id
  
-  console.log(req.params.id);
-  getUserTweets(req.params.id, function(err, datos){
-    console.log('res', datos);
-    res.json(datos);
-  });
+//   console.log(req.params.id);
+//   getUserTweets(req.params.id, function(err, datos){
+//     console.log('res', datos);
+//     res.json(datos);
+//   });
 
-   function getUserTweets (user_id, cb){
-    if (!user_id) cb(null, null);
-    var datos = [];
-    twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:20, include_rts:false}, function(err, data, resp){
-      var tweets = data;
-      var i = 0, len = tweets.length;
-      for(i; i < len; i++) {
-        console.log('text: ', tweets[i].text);
-        datos.push(tweets[i].user.screen_name);
-        compararTextDic(tweets[i].text, tweets[i].user.screen_name);
-      }
-    cb(null, datos);
-    });
-  }
+//    function getUserTweets (user_id, cb){
+//     if (!user_id) cb(null, null);
+//     var datos = [];
+//     twitter.get('statuses/user_timeline', {user_id:user_id, exclude_replies:true, count:20, include_rts:false}, function(err, data, resp){
+//       var tweets = data;
+//       var i = 0, len = tweets.length;
+//       for(i; i < len; i++) {
+//         console.log('text: ', tweets[i].text);
+//         datos.push(tweets[i].user.screen_name);
+//         compararTextDic(tweets[i].text, tweets[i].user.screen_name);
+//       }
+//     cb(null, datos);
+//     });
+//   }
 
-  function compararTextDic(text, screen_name){
-    var texto = text.split(' ');
-    var s1 = new sets.Set(texto);
-    var s2 = new sets.Set(diccionario);
+//   function compararTextDic(text, screen_name){
+//     var texto = text.split(' ');
+//     var s1 = new sets.Set(texto);
+//     var s2 = new sets.Set(diccionario);
 
-    var resultado =  s1.intersection(s2).array();
+//     var resultado =  s1.intersection(s2).array();
 
-    if(resultado.length > 1){
-       console.log('usuario', screen_name);
-       console.log('Mensaje', text);
-      datos.push({"name":screen_name});
-      console.log('Intersection:', s1.intersection(s2).array());
-    }else{
-    }
-  };
-  res.json(datos);
-};
+//     if(resultado.length > 1){
+//        console.log('usuario', screen_name);
+//        console.log('Mensaje', text);
+//       datos.push({"name":screen_name});
+//       console.log('Intersection:', s1.intersection(s2).array());
+//     }else{
+//     }
+//   };
+//   res.json(datos);
+// };
