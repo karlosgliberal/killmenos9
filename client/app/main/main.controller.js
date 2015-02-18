@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('killmenos9App')
-  .controller('MainCtrl', function ($scope, $http) {
+  .controller('MainCtrl', function ($scope, $http, $timeout) {
   
     $scope.listaPalabras = [
       {name:'pamplona', id:1},
