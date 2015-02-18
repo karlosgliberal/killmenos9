@@ -17,6 +17,10 @@ angular.module('killmenos9App')
     $scope.resultadoAlgoritmo = [];
     $scope.objetivos = [];
 
+    $scope.myFunct = function teclado(event){
+      console.log(event);
+    }
+
     $scope.buscarPatron = function buscarPatron(palabras){
       var idx = $scope.selection.indexOf(palabras);
       // is currently selected
