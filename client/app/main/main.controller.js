@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('killmenos9App')
-  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval) {
+  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce) {
   
     $scope.listaPalabras = [
       {name:'pamplona', id:1},
@@ -101,12 +101,18 @@ angular.module('killmenos9App')
 
           }else{
             $scope.textoObjetivos = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
-            $scope.videoObjeto = '<video width="420" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>';
+            var timePreparando = $timeout(function() {
+              $scope.textoDrone = '<p>KILL-9 ENVIANDO DRONES HACIA LOS OBJETIVOS<span>|</span></p>';
+            }, 2000);
+            var timeDrones = $timeout(function() {
+              $scope.textoDrone = '';
+              $scope.videoObjeto = $sce.trustAsHtml('<video width="420" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>');
+            }, 4000);
 
           }
           var timeout = $timeout(function(){
             $scope.objetivos = resAlgoritmo;
-          }, 3000);
+          }, 9000);
         });
       }
     }    

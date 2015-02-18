@@ -76,6 +76,9 @@
             <!-- fin de objetivo-->
         </div>
         <div class="titulo-container"><h3>DRONE VISION</h3></div>
+        <div ng-show="!objetivos.length" class="intro-uno">
+          <div class="intro-uno" ng-bind-html="textoDrone"></div>
+        </div>
         <div class="drone-vision" ng-bind-html="videoObjeto"></div>
       </div>
      <!-- fin box rigth -->
