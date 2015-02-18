@@ -277,6 +277,8 @@ body {
 	text-transform: uppercase;
 }
 
+// ANIMACION
+
 .blink {
       animation: blink 1s steps(5, start) infinite;
       -webkit-animation: blink 1s steps(5, start) infinite;
@@ -291,3 +293,39 @@ body {
         visibility: hidden;
       }
     }
+// ANIMACION TERMINAL
+
+.intro-uno p{
+  color: #79C881;
+  font-family:@data; 
+  font-size: 20px;
+  margin: 10px 0 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+  animation: type 4s steps(60, end); 
+}
+
+
+.intro-uno span{
+  animation: blink-uno 1s infinite;
+  font-size: 25px;
+}
+
+@keyframes type{ 
+  from { width: 0; } 
+} 
+
+@keyframes type2{
+  0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100; } 
+} 
+
+@keyframes blink-uno{
+  to{opacity: .0;}
+}
+
+::selection{
+  background: @black;
+}
