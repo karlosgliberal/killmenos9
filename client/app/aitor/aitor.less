@@ -25,6 +25,25 @@
 
 @data:'data_control';
 
+
+// MEDIA OBJECT
+.media-body, .media-left, .media-right {
+	display: table-cell;
+	vertical-align: top;
+}
+.media-body {
+	width: 10000px;
+}
+.media, .media-body {
+	overflow: hidden;
+	zoom: 1;
+}
+
+.media img {
+	margin-right: 10px;
+}
+
+
 // DIVIDES
 .divide-pantalla {
 	width: 5%;
@@ -102,7 +121,6 @@ body {
 
 
 //GENERAL
-
 .titulo-container {
 	width: 100%;
 	background-image: url("/assets/images/titulo-bk.png");
@@ -174,19 +192,95 @@ body {
 	font-size: 12px;
 }
 
-// MEDIA OBJECT
-.media-body, .media-left, .media-right {
-	display: table-cell;
-	vertical-align: top;
-}
-.media-body {
-	width: 10000px;
-}
-.media, .media-body {
-	overflow: hidden;
-	zoom: 1;
+.objetivo-texto {
+	color: @white;
+	font-size: 18px;
+	font-family: @data;
 }
 
-.media img {
-	margin-right: 10px;
+.eliminar {
+	background-color: @red;
+	color:@white;
+	text-transform: uppercase;
+	font-family: @data;
+	font-size: 23px;
+	padding: 7px 20px;
 }
+.analizando-footer {
+	border-bottom: 3px solid @green;
+	margin: 20px 0px;
+}
+
+.objetivo-img-wrapper {
+	width: 49px;
+	height: 47px;
+	overflow: hidden;
+	position: relative;
+	top: -33px;
+	left: 25px;
+	img {
+		max-width: 100%;
+	}
+}
+
+.objetivo-img {
+	background-image: url("/assets/images/ob-bk.png");
+	background-repeat: no-repeat;
+	width: 100px;
+	height: 100px;
+	margin-right: 24px;
+}
+
+
+.objetivo-wrapper {
+	.media {
+		padding-left: 92px;
+		margin: 25px 0px;
+		p {
+		margin-bottom: 5px;
+	 }
+	}
+	.objetivo-img:before {
+		content: ">";
+		color: @green;
+		font-size: 40px;
+		font-family: @data;
+		position: relative;
+		left: -47px;
+		top: 25px;
+   }
+}
+
+.md-eliminar {
+	padding-left: 92px;
+	p {
+	margin-bottom: 5px;
+	}
+}
+
+
+.md-eliminar:before {
+	content: ">";
+	color: @green;
+	font-size: 40px;
+	font-family: @data;
+	position: relative;
+	left: -47px;
+	top: 80px;
+}
+
+
+.blink {
+      animation: blink 1s steps(5, start) infinite;
+      -webkit-animation: blink 1s steps(5, start) infinite;
+    }
+    @keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
+    @-webkit-keyframes blink {
+      to {
+        visibility: hidden;
+      }
+    }
