@@ -24,7 +24,7 @@ angular.module('killmenos9App')
       } else {
         $scope.selection.push(palabras);
       }
-      
+
       buscarTweets($scope.selection);
 
       function buscarTweets(palabras){
@@ -41,6 +41,7 @@ angular.module('killmenos9App')
       function recogerTweets(listaUsuarios){
 
         $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
+          console.log(resAlgoritmo);
           $scope.resultadoAlgoritmo = resAlgoritmo;
         });
       }

@@ -1,52 +1,54 @@
-
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>Kill -9</h1>
-    <img src="assets/images/FLM.png" style="height: 160px; width: 140px;" alt="I'm Yeoman">
-  </div>
-</header>
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1>Palabras</h1>
-      <ul class="col-md-4 col-lg-4 col-sm-6" ng-repeat="palabras in listaPalabras">
-        <li>
-        <input id="{{palabras.id}}" class="palabras btn btn-default" type="checkbox" value="{{palabras.name}}" ng-checked="selection.indexOf(palabras.name) > -1" ng-click="buscarPatron(palabras.name)"/>
-        <label for="{{palabras.name}}"></label>
-        {{palabras.name}}
-      </ul>
-    </div>
-  </div>
-</div> 
-
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Usuarios:</h1>
-      <p class="magictime puffIn">Procesando</p>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="usuario in listaUsuarios">
-        <img src="{{usuario.img}}">
-        <li><a href="#" tooltip="{{usuario.info}}">{{usuario.name}}</a></li>
-      </ul>
-    </div>
+<div class="wrapper">
+  <div class="super-container">
+    <div class="header"><img src="/assets/images/kill-logo.png"></div>
+    <div class="intro"><h2>Seleccion de objetivos<h2></div>
+      <!-- box left -->
+      <div class="box">
+        <div class="titulo-container"><h3>Metadatos</h3></div>
+        <div class="monk"></div>
+        <ul class="metadatos" ng-repeat="palabras in listaPalabras">
+          <li> 
+            <input id="{{palabras.id}}" class="palabras btn btn-default" type="checkbox" value="{{palabras.name}}" ng-checked="selection.indexOf(palabras.name) > -1" ng-click="buscarPatron(palabras.name)"/>
+            <label for="{{palabras.name}}"></label>
+           {{palabras.name}}
+        </li>
+        </ul>
+       <div class="titulo-container"><h3>Buscando objetivos</h3></div>
+       <div class="monk"></div>
+       <div class="divide-10"></div>
+       <!-- empieza buscando objetivos -->
+       <div class="buscando-objetivos">
+        <div class="row" >
+          <div class="col-md-2" ng-repeat="usuario in listaUsuarios">
+             <img id="{{usuario.id}}" src="{{usuario.img}}" class="thumbnail img-objetivos img-responsive magictime puffIn">
+          </div>
+        </div>
+        <div class="texto-pie pull-right">BUSCANDO %</div>
+       </div>
+       <!-- fin de buscando objetivos -->
+       <div class="divide-50"></div>
+       <div class="analizando-datos">
+        <div class="titulo-container"><h3>Analizando datos</h3></div>
+        <div class="monk"></div>
+          <!-- Objeto twitter -->
+            <div class="media" ng-repeat="res in resultadoAlgoritmo">
+              <div class="media-left magictime puffIn">
+                  <img class="media-object" src="{{res.img}}">
+              </div>
+              <div class="media-body analizando-texto">{{res.text}}</div>
+            </div>
+        <!-- fin de objeto twitter -->
+      <div class="texto-pie pull-right">coincidencias: 6</div>
+       </div>
+      </div>
+      <!-- fin box left -->
+      <div class="divide-pantalla"></div>
+      <!-- box rigth -->
+      <div class="box">
+        <div class="titulo-container"><h3>Objetivo confirmados</h3></div>
+        <div class="monk"></div>
+      </div>
+     <!-- fin box rigth -->
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Tweets:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="res in resultadoAlgoritmo">
-        <li><a href="#" tooltip="{{res.info}}">{{res.name}}</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Interzonas labs |
-        <a href="https://twitter.com/tyhenkel">@interzonas.inf</a> |
-  </div>
-</footer>

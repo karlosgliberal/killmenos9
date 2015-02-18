@@ -47,3 +47,199 @@ li {list-style-type: none;}
 .animate-leave.animate-leave-active, .animate-enter {
   left: 500px;
 }
+
+
+//aitor
+
+// KILL - 9 
+// THE FIRST MACHINE OF FLMT
+
+
+// COLORES 
+@green: #77B8AB;
+@red: #7D412E;
+@white: #fff;
+@gray: #AAAAAA;
+@black: #000;
+
+// FUENTES
+
+@font-face {
+    font-family: 'data_control';
+    src: url('/assets/fonts/fontsdata-latin-webfont.eot');
+    src: url('/assets/fonts/data-latin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/assets/fonts/data-latin-webfont.woff2') format('woff2'),
+         url('/assets/fonts/data-latin-webfont.woff') format('woff'),
+         url('/assets/fonts/data-latin-webfont.ttf') format('truetype'),
+         url('/assets/fonts/data-latin-webfont.svg#data_controllatin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@data:'data_control';
+
+// DIVIDES
+.divide-pantalla {
+  width: 5%;
+  height: 1440px;
+  float: left;
+}
+
+.divide-50 {
+  width: 100%;
+  height: 50px;
+}
+
+.divide-40 {
+  width: 100%;
+  height: 40px;
+}
+
+.divide-30 {
+  width: 100%;
+  height: 30px;
+}
+
+.divide-20 {
+  width: 100%;
+  height: 20px;
+}
+
+.divide-10 {
+  width: 100%;
+  height: 10px;
+}
+
+// BASE
+body {
+  // background-color: @black;
+}
+
+// LAYOUT
+.super-container{
+  width: 990px;
+  height: 1440px;
+  border: 1px dotted @white;
+  padding: 15px;
+  background-color: @black;
+}
+
+.box {
+  border: 4px solid @green;
+  height: 1180px;
+  width: 47%;
+  float: left;
+  padding: 10px;
+}
+
+.intro {
+  width: 100%;
+  height: 50px;
+  margin: 15px 0px;
+  background-color: @red;
+  color: @green;
+  h2 {
+    font-family: @data;
+    color: @green;
+    font-size: 44px;
+    padding: 4px;
+  }
+}
+.header {
+  width: 100%;
+  height: 130px;
+  background-color: @green;
+  margin-top: 5px;
+  padding: 15px;
+} 
+
+
+//GENERAL
+
+.titulo-container {
+  width: 100%;
+  background-image: url("/assets/images/titulo-bk.png");
+  height: 46px;
+  margin: 20px 0px;
+  color:@green;
+  h3 {
+    padding-top: 15px;
+    font-family: @data;
+    font-size: 26px;
+
+  }
+}
+
+.monk {
+  width: 100%;
+  height: 6px;
+  background-image: url("/assets/images/monk.png");
+  background-repeat: no-repeat;
+}
+
+.metadatos {
+  font-family: @data;
+  color: @gray;
+  font-size: 30px;
+  text-transform: uppercase;
+  padding-left: 0px;
+  margin-top: 10px;
+  li {
+  padding: 5px 0px;
+  }
+
+  li:nth-last-child(5):before {
+      content: "1 > "
+  }
+  li:nth-last-child(4):before {
+      content: "2 > "
+  }
+  li:nth-last-child(3):before {
+      content: "3 > ";
+  }
+  li:nth-last-child(2):before {
+      content: "4 > ";
+  }
+  li:nth-last-child(1):before {
+      content: "5 > ";
+  }
+}
+
+.img-objetivos {
+  background-color: @green;
+  border: 1px solid @green;
+}
+
+.objetivos-red {
+    border: 1px solid @red;
+    background-color: @red;
+}
+
+.texto-pie {
+  font-family: @data;
+  text-transform: uppercase;
+  color: @white;
+  font-size: 20px;
+}
+
+.analizando-texto {
+  color: @green;
+  font-size: 12px;
+}
+
+// MEDIA OBJECT
+.media-body, .media-left, .media-right {
+  display: table-cell;
+  vertical-align: top;
+}
+.media-body {
+  width: 10000px;
+}
+.media, .media-body {
+  overflow: hidden;
+  zoom: 1;
+}
+
+.media img {
+  margin-right: 10px;
+}
