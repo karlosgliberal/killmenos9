@@ -38,7 +38,7 @@
               <div class="media-body analizando-texto" ng-bind-html="res.text"></div>
             </div>
         <!-- fin de objeto twitter -->
-      <div class="texto-pie pull-right">coincidencias: 6</div>
+      <div class="texto-pie pull-right">coincidencias: {{total}}</div>
        </div>
       </div>
       <!-- fin box left -->
@@ -50,7 +50,7 @@
       <div class="objetivo-wrapper">
           <!-- Objetivo -->
             <div class="media" ng-repeat="blanco in objetivos">
-              <div class="media-left">
+              <div class="media-left magictime puffIn">
                   <div class="objetivo-img">
                     <div class="objetivo-img-wrapper">
                       <img class="media-object" src="{{blanco.img}}">

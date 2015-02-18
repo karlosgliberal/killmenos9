@@ -74,7 +74,7 @@ exports.show = function(req, res){
            var textSpan = frase.replace(resultado[u], span);
            console.log(textSpan); 
          }
-         paraEnviar.push({name:datos[i].name, id:datos[i].id, text:textSpan, img:datos[i].img});
+         paraEnviar.push({name:datos[i].name, id:datos[i].id, text:textSpan, img:datos[i].img, total:datos.length});
       }else{
       }
     }

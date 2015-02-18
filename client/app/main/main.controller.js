@@ -36,6 +36,7 @@ angular.module('killmenos9App')
           };
           recogerTweets(cajaUser);
           $scope.listaUsuarios = listaUsuarios;
+
         });
       }
 
@@ -44,6 +45,7 @@ angular.module('killmenos9App')
         $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
           console.log(resAlgoritmo);
           $scope.resultadoAlgoritmo = resAlgoritmo;
+          $scope.total = resAlgoritmo.length;
           var timeout = $timeout(function(){
             $scope.objetivos = resAlgoritmo;
           }, 3000);
