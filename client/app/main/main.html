@@ -47,6 +47,30 @@
       <div class="box">
         <div class="titulo-container"><h3>Objetivo confirmados</h3></div>
         <div class="monk"></div>
+      <div class="objetivo-wrapper">
+          <!-- Objetivo -->
+            <div class="media" ng-repeat="blanco in objetivos">
+              <div class="media-left">
+                  <div class="objetivo-img">
+                    <div class="objetivo-img-wrapper">
+                      <img class="media-object" src="{{blanco.img}}">
+                    </div>
+                  </div>
+              </div>
+              <div class="media-body objetivo-texto">
+               <p>@{{blanco.name}}</p>
+               <p>confirmacion: 100%</p>
+               <p><span class=" blink eliminar">eliminar</span></p>
+              </div>
+            </div>
+            <!-- fin de objetivo-->
+        </div>
+        <div class="titulo-container"><h3>DRONE VISION</h3></div>
+        <div class="drone-vision">
+          <video width="420">
+            <source src="/assets/video/drone.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
      <!-- fin box rigth -->
   </div>

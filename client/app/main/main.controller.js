@@ -15,6 +15,7 @@ angular.module('killmenos9App')
     $scope.listaUsuarios = [];
     $scope.selection=[];
     $scope.resultadoAlgoritmo = [];
+    $scope.objetivos = [];
 
     $scope.buscarPatron = function buscarPatron(palabras){
       var idx = $scope.selection.indexOf(palabras);
@@ -43,6 +44,9 @@ angular.module('killmenos9App')
         $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
           console.log(resAlgoritmo);
           $scope.resultadoAlgoritmo = resAlgoritmo;
+          var timeout = $timeout(function(){
+            $scope.objetivos = resAlgoritmo;
+          }, 3000);
         });
       }
     }    
