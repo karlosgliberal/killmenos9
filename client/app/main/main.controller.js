@@ -4,12 +4,11 @@ angular.module('killmenos9App')
   .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys) {
   
     $scope.listaPalabras = [
-      {name:'pamplona', id:1},
-      {name:"desahucios", id:2},
-      {name:"crisis", id:3}, 
-      {name:"crimen", id:4},
-      {name:"asesinos", id:5},
-      {name:"madrid", id:6},
+      {name:"pamplona", id:1, clase:'metadato-palabra'},
+      {name:"desahucios", id:2, clase:'metadato-palabra'},
+      {name:"crisis", id:3, clase:'metadato-palabra'}, 
+      {name:"asesinos", id:5, clase:'metadato-palabra'},
+      {name:"madrid", id:6, clase:'metadato-palabra'},
     ];
 
     $scope.listaUsuarios = [];
@@ -23,6 +22,7 @@ angular.module('killmenos9App')
       combo: 'a',
       description: 'Palabra a',
       callback: function() {
+        $scope.listaPalabras[0].clase = 'metadato-activo';
         $scope.buscarPatron($scope.listaPalabras[0].name);
       }
     });
@@ -30,6 +30,7 @@ angular.module('killmenos9App')
       combo: 's',
       description: 'Palabra s',
       callback: function() {
+        $scope.listaPalabras[1].clase = 'metadato-activo';
         $scope.buscarPatron($scope.listaPalabras[1].name);
       }
     });
@@ -37,6 +38,7 @@ angular.module('killmenos9App')
       combo: 'd',
       description: 'Palabra d',
       callback: function() {
+        $scope.listaPalabras[2].clase = 'metadato-activo';
         $scope.buscarPatron($scope.listaPalabras[2].name);
       }
     });
@@ -44,6 +46,7 @@ angular.module('killmenos9App')
       combo: 'f',
       description: 'Palabra f',
       callback: function() {
+        $scope.listaPalabras[3].clase = 'metadato-activo';
         $scope.buscarPatron($scope.listaPalabras[3].name);
       }
     });
@@ -51,6 +54,7 @@ angular.module('killmenos9App')
       combo: 'g',
       description: 'Palabra g',
       callback: function() {
+        $scope.listaPalabras[4].clase = 'metadato-activo';
         $scope.buscarPatron($scope.listaPalabras[4].name);
       }
     });
@@ -58,13 +62,20 @@ angular.module('killmenos9App')
       combo: 'h',
       description: 'Palabra h',
       callback: function() {
+        $scope.listaPalabras[5].clase = 'metadato-activo';
         $scope.buscarPatron($scope.listaPalabras[5].name);
+      }
+    });
+    hotkeys.add({
+      combo: 'z',
+      description: 'ejecutar',
+      callback: function() {
+        $scope.ejecutar();
       }
     });
 
     var stop;
     $scope.contadorPorcentaje = function contadorPorcentaje() {
-      // Don't start a new fight if we are already fighting
       if ( angular.isDefined(stop) ) return;
 
       stop = $interval(function() {
@@ -100,57 +111,79 @@ angular.module('killmenos9App')
         $scope.selection.push(palabras);
       }
 
+      if($scope.selection.length >= 3){
+        $scope.textoBuscando = '<p>KILL-9 ERROR MIN 2 WORD, REBOOT... <span>|</span></p>';
+        var timeTexto = $timeout(function() {
+          $window.location.reload();
+        }, 4000);
 
-      $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO POSIBLES OBJETIVOS<span>|</span></p>';
-      var timeTexto = $timeout(function() {
-        buscarTweets($scope.selection);
-      }, 3500);  
+      }else{
+        $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO POSIBLES OBJETIVOS<span>|</span></p>';
+        var timeTexto = $timeout(function() {
+          buscarTweets($scope.selection);
+        }, 3500);
+      }
+    }
 
-      function buscarTweets(palabras){
-        var cajaUser = [];
-        $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
-          for (var i = listaUsuarios.length - 1; i >= 0; i--) {
-            cajaUser.push(listaUsuarios[i].id);
-          };
-          $scope.porcentaje = 100;
-          $scope.listaUsuarios = listaUsuarios;
-          $scope.textoAlgoritmo = '<p>KILL-9 ALGORITMO ANALIZANDO TWEETS<span>|</span></p>';
-          var timeRecoger = $timeout(function() {
-            recogerTweets(cajaUser);
+    function buscarTweets(palabras){
+      var cajaUser = [];
+      $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
+        for (var i = listaUsuarios.length - 1; i >= 0; i--) {
+          cajaUser.push(listaUsuarios[i].id);
+        };
+        $scope.porcentaje = 100;
+        $scope.listaUsuarios = listaUsuarios;
+        $scope.textoAlgoritmo = '<p>KILL-9 ALGORITMO ANALIZANDO TWEETS<span>|</span></p>';
+        var timeRecoger = $timeout(function() {
+          recogerTweets(cajaUser);
+        }, 3000);
+      });
+    }
+
+    function recogerTweets(listaUsuarios){
+      $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
+        $scope.resultadoAlgoritmo = resAlgoritmo;
+        $scope.total = resAlgoritmo.length;
+        if(resAlgoritmo.length == 0){
+          $scope.textoAlgoritmo = '<p>KILL-9 NO MATCH <span>|</span></p>';
+          var timeoutNomatch = $timeout(function(){
+            $scope.textoAlgoritmo = '<p>KILL-9 REBOOT... <span>|</span></p>';
           }, 3000);
-        });
+          var timeoutRestart = $timeout(function(){
+            $window.location.reload();
+          }, 6000);
+
+        }else{
+          $scope.textoObjetivos = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
+          var timePreparando = $timeout(function() {
+            $scope.textoDrone = '<p>KILL-9 ENVIANDO DRONES HACIA LOS OBJETIVOS<span>|</span></p>';
+          }, 2000);
+          var timeDrones = $timeout(function() {
+            $scope.textoDrone = '';
+            $scope.videoObjeto = $sce.trustAsHtml('<video width="420" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>');
+          }, 4000);
+
+        }
+        var timeoutSacarObjetivos = $timeout(function(){
+          $scope.objetivos = resAlgoritmo;
+        }, 9000);
+      });
+    }
+
+    $scope.ejecutar = function ejecutar(){
+      if($scope.objetivos.length == 0){
+        //$scope.textoBuscando = '<p>KILL-9 ERROR NO TARGET, REBOOT... <span>|</span></p>';
+        var timeTexto = $timeout(function() {
+          //$window.location.reload();
+        }, 4000);
+      }else{
+        var randNumber = Math.floor((Math.random() * $scope.objetivos.length  ) + 0);
+        $scope.textoResultadoFin = '<p>KILL-9 OBJETIVO SELECIONADO <span>|</span></p>';
+        var timeseleccionado = $timeout(function() {
+          $scope.objetivos[randNumber].clase = 'blink eliminar';
+        }, 2000);
       }
 
-      function recogerTweets(listaUsuarios){
-
-
-        $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
-          $scope.resultadoAlgoritmo = resAlgoritmo;
-          $scope.total = resAlgoritmo.length;
-          if(resAlgoritmo.length == 0){
-            $scope.textoAlgoritmo = '<p>KILL-9 NO MATCH <span>|</span></p>';
-            var timeoutNomatch = $timeout(function(){
-              $scope.textoAlgoritmo = '<p>KILL-9 REBOOT... <span>|</span></p>';
-            }, 3000);
-            var timeoutRestart = $timeout(function(){
-              $window.location.reload();
-            }, 6000);
-
-          }else{
-            $scope.textoObjetivos = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
-            var timePreparando = $timeout(function() {
-              $scope.textoDrone = '<p>KILL-9 ENVIANDO DRONES HACIA LOS OBJETIVOS<span>|</span></p>';
-            }, 2000);
-            var timeDrones = $timeout(function() {
-              $scope.textoDrone = '';
-              $scope.videoObjeto = $sce.trustAsHtml('<video width="420" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>');
-            }, 4000);
-
-          }
-          var timeoutSacarObjetivos = $timeout(function(){
-            $scope.objetivos = resAlgoritmo;
-          }, 9000);
-        });
-      }
-    }    
+    }
+    //}    
   });

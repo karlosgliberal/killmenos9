@@ -4,13 +4,11 @@
     <div class="intro"><h2>Seleccion de objetivos<h2></div>
       <!-- box left -->
       <div class="box">
-        <div class="titulo-container" shortcut="{a: playPause}"><h3>Metadatos</h3></div>
+        <div class="titulo-container"><h3>Metadatos</h3></div>
         <div class="monk"></div>
         <ul class="metadatos" ng-repeat="palabras in listaPalabras">
-          <li> 
-            <input id="{{palabras.id}}" class="palabras btn btn-default" type="checkbox" value="{{palabras.name}}" ng-checked="selection.indexOf(palabras.name) > -1" ng-click="buscarPatron(palabras.name)"/>
-            <label for="{{palabras.name}}"></label>
-           {{palabras.name}}
+          <li class="{{palabras.clase}}">
+           {{$index+1}} > {{palabras.name}}
         </li>
         </ul>
        <div class="titulo-container"><h3>Buscando objetivos</h3></div>
@@ -56,6 +54,7 @@
         <div class="monk"></div>
       <div class="objetivo-wrapper">
           <!-- Objetivo -->
+            <div class="intro-uno" ng-bind-html="textoResultadoFin"></div>
             <div ng-show="!objetivos.length" class="intro-uno">
               <div class="intro-uno" ng-bind-html="textoObjetivos"></div>
             </div>
@@ -70,7 +69,7 @@
               <div class="media-body objetivo-texto">
                <p>@{{blanco.name}}</p>
                <p>confirmacion: 100%</p>
-               <p><span class=" blink eliminar">eliminar</span></p>
+               <p><span class="{{blanco.clase}}">eliminar</span></p>
               </div>
             </div>
             <!-- fin de objetivo-->
