@@ -40,7 +40,6 @@ exports.show = function(req, res){
         var tweets = data;
         var i = 0, len = tweets.length; 
         for(i; i < len; i++) {
-          console.log(tweets[i].text);
           datos.push({
             name:tweets[i].user.screen_name, 
             id:tweets[i].user.id, 
@@ -86,5 +85,9 @@ exports.show = function(req, res){
       }
     }
     res.json(paraEnviar);
+  }
+
+  function crearFrase(frase){
+
   }
 }

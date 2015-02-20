@@ -20,7 +20,7 @@
             <div ng-show="!listaUsuarios.length" class="intro-uno">
               <div class="intro-uno" ng-bind-html="textoBuscando"></div>
             </div>
-          <div class="col-md-2" ng-repeat="usuario in listaUsuarios">
+          <div class="col-sm-2" ng-repeat="usuario in listaUsuarios">
              <img id="{{usuario.id}}" src="{{usuario.img}}" class="thumbnail img-objetivos img-responsive magictime puffIn">
           </div>
         </div>
@@ -43,6 +43,7 @@
               <div class="media-body analizando-texto" ng-bind-html="res.text"></div>
             </div>
         <!-- fin de objeto twitter -->
+      <div class="analizando-footer"></div>
       <div class="texto-pie pull-right">coincidencias: {{total}}</div>
        </div>
       </div>

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('killmenos9App')
-  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys) {
+  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys, $routeParams) {
   
     $scope.listaPalabras = [
       {name:"pamplona", id:1, clase:'metadato-palabra'},
@@ -16,6 +16,7 @@ angular.module('killmenos9App')
     $scope.resultadoAlgoritmo = [];
     $scope.objetivos = [];
     $scope.porcentaje = 0;
+    $scope.controlEjecutar = 0;
     
 
     hotkeys.add({
@@ -118,7 +119,7 @@ angular.module('killmenos9App')
         }, 4000);
 
       }else{
-        $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO POSIBLES OBJETIVOS<span>|</span></p>';
+        $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO OBJETIVOS<span>|</span></p>';
         var timeTexto = $timeout(function() {
           buscarTweets($scope.selection);
         }, 3500);
@@ -160,7 +161,7 @@ angular.module('killmenos9App')
           }, 2000);
           var timeDrones = $timeout(function() {
             $scope.textoDrone = '';
-            $scope.videoObjeto = $sce.trustAsHtml('<video width="420" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>');
+            $scope.videoObjeto = $sce.trustAsHtml('<video width="370" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>');
           }, 4000);
 
         }
@@ -171,19 +172,20 @@ angular.module('killmenos9App')
     }
 
     $scope.ejecutar = function ejecutar(){
-      if($scope.objetivos.length == 0){
-        //$scope.textoBuscando = '<p>KILL-9 ERROR NO TARGET, REBOOT... <span>|</span></p>';
-        var timeTexto = $timeout(function() {
-          //$window.location.reload();
-        }, 4000);
-      }else{
-        var randNumber = Math.floor((Math.random() * $scope.objetivos.length  ) + 0);
-        $scope.textoResultadoFin = '<p>KILL-9 OBJETIVO SELECIONADO <span>|</span></p>';
-        var timeseleccionado = $timeout(function() {
-          $scope.objetivos[randNumber].clase = 'blink eliminar';
-        }, 2000);
+      if($scope.controlEjecutar  == 0){
+        $scope.ejecutar = 1;
+        if($scope.objetivos.length == 0){
+          //$scope.textoBuscando = '<p>KILL-9 ERROR NO TARGET, REBOOT... <span>|</span></p>';
+          var timeTexto = $timeout(function() {
+            //$window.location.reload();
+          }, 4000);
+        }else{
+          var randNumber = Math.floor((Math.random() * $scope.objetivos.length  ) + 0);
+          $scope.textoResultadoFin = '<p>KILL-9 OBJETIVO SELECIONADO <span>|</span></p>';
+          var timeseleccionado = $timeout(function() {
+            $scope.objetivos[randNumber].clase = 'blink eliminar';
+          }, 2000);
+        }
       }
-
     }
-    //}    
   });
