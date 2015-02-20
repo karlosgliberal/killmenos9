@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('killmenos9App')
-  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce) {
+  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys) {
   
     $scope.listaPalabras = [
       {name:'pamplona', id:1},
@@ -19,8 +19,51 @@ angular.module('killmenos9App')
     $scope.porcentaje = 0;
     
 
+    hotkeys.add({
+      combo: 'a',
+      description: 'Palabra a',
+      callback: function() {
+        $scope.buscarPatron($scope.listaPalabras[0].name);
+      }
+    });
+    hotkeys.add({
+      combo: 's',
+      description: 'Palabra s',
+      callback: function() {
+        $scope.buscarPatron($scope.listaPalabras[1].name);
+      }
+    });
+    hotkeys.add({
+      combo: 'd',
+      description: 'Palabra d',
+      callback: function() {
+        $scope.buscarPatron($scope.listaPalabras[2].name);
+      }
+    });
+    hotkeys.add({
+      combo: 'f',
+      description: 'Palabra f',
+      callback: function() {
+        $scope.buscarPatron($scope.listaPalabras[3].name);
+      }
+    });
+    hotkeys.add({
+      combo: 'g',
+      description: 'Palabra g',
+      callback: function() {
+        $scope.buscarPatron($scope.listaPalabras[4].name);
+      }
+    });
+    hotkeys.add({
+      combo: 'h',
+      description: 'Palabra h',
+      callback: function() {
+        $scope.buscarPatron($scope.listaPalabras[5].name);
+      }
+    });
+
     var stop;
-    $scope.fight = function fight() {
+    $scope.contadorPorcentaje = function contadorPorcentaje() {
       // Don't start a new fight if we are already fighting
       if ( angular.isDefined(stop) ) return;
 
@@ -28,12 +71,12 @@ angular.module('killmenos9App')
         if ($scope.porcentaje != 100) {
           $scope.porcentaje = $scope.porcentaje + 2;
         } else {
-          $scope.stopFight();
+          $scope.stopContadorPorcentaje();
         }
       }, 100);
     };
 
-    $scope.stopFight = function() {
+    $scope.stopContadorPorcentaje = function() {
       if (angular.isDefined(stop)) {
         $interval.cancel(stop);
         stop = undefined;
@@ -42,16 +85,15 @@ angular.module('killmenos9App')
 
 
     $scope.$on('$destroy', function() {
-      // Make sure that the interval is destroyed too
-      $scope.stopFight();
+      $scope.stopContadorPorcentaje();
     });
 
     $scope.buscarPatron = function buscarPatron(palabras){
+
       var timePorcentaje = $timeout(function() {
-        $scope.fight();
+        $scope.contadorPorcentaje();
       }, 1500);
       var idx = $scope.selection.indexOf(palabras);
-      // is currently selected
       if (idx > -1) {
         $scope.selection.splice(idx, 1);
       } else {
@@ -83,19 +125,14 @@ angular.module('killmenos9App')
 
 
         $http.get('/api/recogerTweets/'+listaUsuarios).success(function(resAlgoritmo) {
-          console.log(resAlgoritmo);
           $scope.resultadoAlgoritmo = resAlgoritmo;
           $scope.total = resAlgoritmo.length;
-          console.log(resAlgoritmo.length);
           if(resAlgoritmo.length == 0){
-            console.log('res');
             $scope.textoAlgoritmo = '<p>KILL-9 NO MATCH <span>|</span></p>';
-
-            var timeout = $timeout(function(){
+            var timeoutNomatch = $timeout(function(){
               $scope.textoAlgoritmo = '<p>KILL-9 REBOOT... <span>|</span></p>';
             }, 3000);
-
-            var timeout = $timeout(function(){
+            var timeoutRestart = $timeout(function(){
               $window.location.reload();
             }, 6000);
 
@@ -110,7 +147,7 @@ angular.module('killmenos9App')
             }, 4000);
 
           }
-          var timeout = $timeout(function(){
+          var timeoutSacarObjetivos = $timeout(function(){
             $scope.objetivos = resAlgoritmo;
           }, 9000);
         });
