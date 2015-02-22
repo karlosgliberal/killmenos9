@@ -83,7 +83,7 @@ angular.module('killmenos9App')
       });
       var timeTexto = $timeout(function() {
         $window.location.reload();
-      }, 4000);
+      }, 5500);
     }
 
     var stop;
@@ -136,12 +136,17 @@ angular.module('killmenos9App')
     function buscarTweets(palabras){
       var cajaUser = [];
       $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
+        console.log(listaUsuarios.length);
+        if(listaUsuarios.length == 0){
+          $scope.errorDialog('KILL-9 PALABRAS NO CONBINADAS REBOOT...'); 
+        }
         for (var i = listaUsuarios.length - 1; i >= 0; i--) {
           cajaUser.push(listaUsuarios[i].id);
         };
         $scope.porcentaje = 100;
         $scope.listaUsuarios = listaUsuarios;
         $scope.textoAlgoritmo = '<p>KILL-9 ALGORITMO ANALIZANDO TWEETS<span>|</span></p>';
+
         var timeRecoger = $timeout(function() {
           recogerTweets(cajaUser);
         }, 3000);
@@ -155,13 +160,6 @@ angular.module('killmenos9App')
         if(resAlgoritmo.length == 0){
           $scope.errorDialog('KILL-9 NO MATCH REBOOT...');
           $scope.textoAlgoritmo = '<p> <span>|</span></p>';
-          // var timeoutNomatch = $timeout(function(){
-          //   $scope.textoAlgoritmo = '<p>KILL-9 REBOOT... <span>|</span></p>';
-          // }, 3000);
-          // var timeoutRestart = $timeout(function(){
-          //   $window.location.reload();
-          // }, 6000);
-
         }else{
           $scope.textoObjetivos = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
           var timePreparando = $timeout(function() {
