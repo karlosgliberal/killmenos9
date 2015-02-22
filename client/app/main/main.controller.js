@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('killmenos9App')
-  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys, $routeParams) {
+  .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys, $routeParams, ngDialog) {
   
     $scope.listaPalabras = [
       {name:"pamplona", id:1, clase:'metadato-palabra'},
       {name:"desahucios", id:2, clase:'metadato-palabra'},
       {name:"crisis", id:3, clase:'metadato-palabra'}, 
-      {name:"asesinos", id:5, clase:'metadato-palabra'},
+      {name:"ramplona", id:5, clase:'metadato-palabra'},
       {name:"madrid", id:6, clase:'metadato-palabra'},
     ];
 
@@ -75,6 +75,17 @@ angular.module('killmenos9App')
       }
     });
 
+    $scope.errorDialog = function errorDialog(message){
+      $scope.errorMesaje = '<p>'+ message +'<span>|</span></p>';;
+      var dialog = ngDialog.open({
+        template: 'errorKill',
+        scope: $scope
+      });
+      var timeTexto = $timeout(function() {
+        $window.location.reload();
+      }, 4000);
+    }
+
     var stop;
     $scope.contadorPorcentaje = function contadorPorcentaje() {
       if ( angular.isDefined(stop) ) return;
@@ -113,11 +124,7 @@ angular.module('killmenos9App')
       }
 
       if($scope.selection.length >= 3){
-        $scope.textoBuscando = '<p>KILL-9 ERROR MIN 2 WORD, REBOOT... <span>|</span></p>';
-        var timeTexto = $timeout(function() {
-          $window.location.reload();
-        }, 4000);
-
+        $scope.errorDialog('KILL-9 ERROR MIN 2 WORD, REBOOT...');
       }else{
         $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO OBJETIVOS<span>|</span></p>';
         var timeTexto = $timeout(function() {
@@ -146,13 +153,14 @@ angular.module('killmenos9App')
         $scope.resultadoAlgoritmo = resAlgoritmo;
         $scope.total = resAlgoritmo.length;
         if(resAlgoritmo.length == 0){
-          $scope.textoAlgoritmo = '<p>KILL-9 NO MATCH <span>|</span></p>';
-          var timeoutNomatch = $timeout(function(){
-            $scope.textoAlgoritmo = '<p>KILL-9 REBOOT... <span>|</span></p>';
-          }, 3000);
-          var timeoutRestart = $timeout(function(){
-            $window.location.reload();
-          }, 6000);
+          $scope.errorDialog('KILL-9 NO MATCH REBOOT...');
+          $scope.textoAlgoritmo = '<p> <span>|</span></p>';
+          // var timeoutNomatch = $timeout(function(){
+          //   $scope.textoAlgoritmo = '<p>KILL-9 REBOOT... <span>|</span></p>';
+          // }, 3000);
+          // var timeoutRestart = $timeout(function(){
+          //   $window.location.reload();
+          // }, 6000);
 
         }else{
           $scope.textoObjetivos = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';

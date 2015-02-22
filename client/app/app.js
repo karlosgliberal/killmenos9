@@ -5,7 +5,8 @@ angular.module('killmenos9App', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'cfp.hotkeys'
+  'cfp.hotkeys',
+  'ngDialog'
 ])
   .config(function ($routeProvider, $locationProvider) {
     $routeProvider

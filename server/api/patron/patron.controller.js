@@ -40,6 +40,7 @@ exports.show = function(req, res){
     for(i; i < len; i++) {
       datos.push({id:tweets[i].user.id, img:tweets[i].user.profile_image_url,name:tweets[i].user.screen_name});
     }
+    console.log('uuarios', datos.length);
     res.json(datos);
   });
 };

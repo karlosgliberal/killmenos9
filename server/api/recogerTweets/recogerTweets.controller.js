@@ -21,11 +21,7 @@ var diccionario = config.diccionario;
 
 // Get list of things
 exports.index = function(req, res) {
-  console.log(req);
   res.json('recoger')
-
-
-
 };
 
 exports.show = function(req, res){
@@ -69,10 +65,15 @@ exports.show = function(req, res){
          console.log('text', datos[i].text);
          console.log('Intersection:', s1.intersection(s2).array());
          var u = 0, lenr = resultado.length;
+         var textSpan;
          for(u; u < lenr; u++){
+          if(u == 0){
+            frase = frase;
+          } else {
+            frase = textSpan;
+          }
            var span = '<span class="seleccionado">'+ resultado[u] +'</span>';
-           var textSpan = frase.replace(resultado[u], span);
-           console.log(textSpan); 
+           textSpan = frase.replace(resultado[u], span);
          }
          paraEnviar.push({
           name:datos[i].name, 
