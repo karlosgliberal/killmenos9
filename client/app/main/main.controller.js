@@ -75,6 +75,8 @@ angular.module('killmenos9App')
       }
     });
 
+    $scope.msg = '<p>MSG<span>_</span></p>'
+
     $scope.errorDialog = function errorDialog(message){
       $scope.errorMesaje = '<p class="mensaje-modal">'+ message +'<span>|</span></p>';;
       var dialog = ngDialog.open({
@@ -126,7 +128,9 @@ angular.module('killmenos9App')
       if($scope.selection.length >= 3){
         $scope.errorDialog('KILL-9 ERROR MIN 2 WORD, REBOOT...');
       }else{
-        $scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO OBJETIVOS<span>|</span></p>';
+        //$scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO OBJETIVOS<span>|</span></p>';
+        $scope.msg = '<p>KILL-9 ESTA BUSCANDO OBJETIVOS<span>_</span></p>';
+
         var timeTexto = $timeout(function() {
           buscarTweets($scope.selection);
         }, 3500);
