@@ -87,8 +87,4 @@ exports.show = function(req, res){
     }
     res.json(paraEnviar);
   }
-
-  function crearFrase(frase){
-
-  }
 }

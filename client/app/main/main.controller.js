@@ -129,9 +129,7 @@ angular.module('killmenos9App')
       if($scope.selection.length >= 3){
         $scope.errorDialog('KILL-9 ERROR MIN 2 WORD, REBOOT...');
       }else{
-        //$scope.textoBuscando = '<p>KILL-9 ESTA BUSCANDO OBJETIVOS<span>|</span></p>';
-        $scope.msg = '<p>KILL-9 ESTA BUSCANDO OBJETIVOS<span>_</span></p>';
-
+        $scope.msg = '<p>KILL-9 LOCALIZANDO USUARIOS QUE HAN USADO LAS PALABRAS SELECCIONADAS <span>_</span> </p>';
         var timeTexto = $timeout(function() {
           buscarTweets($scope.selection);
         }, 3500);
@@ -143,7 +141,7 @@ angular.module('killmenos9App')
       $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
         console.log(listaUsuarios.length);
         if(listaUsuarios.length == 0){
-          $scope.errorDialog('KILL-9 PALABRAS NO CONBINADAS REBOOT...'); 
+          $scope.errorDialog('KILL-9 PALABRAS NO COMBINADAS REBOOT...'); 
         }
         for (var i = listaUsuarios.length - 1; i >= 0; i--) {
           cajaUser.push(listaUsuarios[i].id);
