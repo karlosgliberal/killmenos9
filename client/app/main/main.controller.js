@@ -76,7 +76,7 @@ angular.module('killmenos9App')
     });
 
     $scope.errorDialog = function errorDialog(message){
-      $scope.errorMesaje = '<p>'+ message +'<span>|</span></p>';;
+      $scope.errorMesaje = '<p class="mensaje-modal">'+ message +'<span>|</span></p>';;
       var dialog = ngDialog.open({
         template: 'errorKill',
         scope: $scope
@@ -167,7 +167,7 @@ angular.module('killmenos9App')
           }, 2000);
           var timeDrones = $timeout(function() {
             $scope.textoDrone = '';
-            $scope.videoObjeto = $sce.trustAsHtml('<video width="370" autoplay><source src="/assets/video/drone.mp4" type="video/mp4"></video>');
+            $scope.videoObjeto = $sce.trustAsHtml('<video width="370" autoplay><source src="/assets/video/drone_small.mp4" type="video/mp4"></video>');
           }, 4000);
 
         }
