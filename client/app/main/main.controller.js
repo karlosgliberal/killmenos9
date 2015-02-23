@@ -81,6 +81,7 @@ angular.module('killmenos9App')
       $scope.errorMesaje = '<p class="mensaje-modal">'+ message +'<span>|</span></p>';;
       var dialog = ngDialog.open({
         template: 'errorKill',
+        className: 'ngdialog-theme-kill',
         scope: $scope
       });
       var timeTexto = $timeout(function() {
