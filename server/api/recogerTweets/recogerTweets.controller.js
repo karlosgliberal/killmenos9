@@ -14,6 +14,8 @@ var _ = require('lodash');
 var sets = require('simplesets');
 var config  = require('../../config/killmenos9'); 
 var async = require('async');
+var fs = require('fs') 
+var gm = require('gm');
 
 var twitter = new Twit(config.twitter);
 var diccionario = config.diccionario;
@@ -76,15 +78,18 @@ exports.show = function(req, res){
            textSpan = frase.replace(resultado[u], span);
          }
          paraEnviar.push({
+          fraseOrig: frase,
           name:datos[i].name, 
           id:datos[i].id, 
           text:textSpan, 
           img:datos[i].img, 
-          total:datos.length, 
+          total:datos.length,
+          palabras: resultado,  
           clase:'clase ' + i});
       }else{
       }
     }
     res.json(paraEnviar);
   }
+
 }

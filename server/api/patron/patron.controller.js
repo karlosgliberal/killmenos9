@@ -20,7 +20,6 @@ var datos = [];
 
 // Get list of things
 exports.index = function(req, res) {
-  console.log(req);
   res.json('index patron');
 };
 

@@ -194,7 +194,27 @@ angular.module('killmenos9App')
           var timeseleccionado = $timeout(function() {
             $scope.objetivos[randNumber].clase = 'blink eliminar';
           }, 2000);
+          var timeseleccionado = $timeout(function() {
+            $scope.generarImagen($scope.objetivos[randNumber]);
+          }, 4000);
         }
       }
     }
+
+    $scope.generarImagen = function generarImagen(obj){
+      var objeto = angular.toJson(obj);
+      $http
+        .get('/api/images/crear', {
+        params: {
+            name: obj.name,
+            id: obj.id,
+            text: obj.text,
+            palabras: obj.palabras
+        }
+     })
+     .success(function (data) {
+          $scope.info_show = data
+     });
+
+    };
   });
