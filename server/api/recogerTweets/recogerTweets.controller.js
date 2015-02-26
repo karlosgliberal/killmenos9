@@ -42,7 +42,8 @@ exports.show = function(req, res){
             name:tweets[i].user.screen_name, 
             id:tweets[i].user.id, 
             text:tweets[i].text, 
-            img:tweets[i].user.profile_image_url
+            img:tweets[i].user.profile_image_url,
+            fecha:tweets[i].created_at
           });
         }
         callback();
@@ -64,7 +65,7 @@ exports.show = function(req, res){
       var s1 = new sets.Set(texto);
       var resultado =  s1.intersection(s2).array();
       if(resultado.length > 1){
-         console.log('text', datos[i].text);
+         console.log('text', datos[i]);
          console.log('Intersection:', s1.intersection(s2).array());
          var u = 0, lenr = resultado.length;
          var textSpan;
@@ -78,12 +79,13 @@ exports.show = function(req, res){
            textSpan = frase.replace(resultado[u], span);
          }
          paraEnviar.push({
-          fraseOrig: frase,
+          fraseOrig: datos[i].text,
           name:datos[i].name, 
           id:datos[i].id, 
           text:textSpan, 
           img:datos[i].img, 
           total:datos.length,
+          fecha:datos[i].fecha,
           palabras: resultado,  
           clase:'clase ' + i});
       }else{

@@ -11,18 +11,20 @@ exports.index = function(req, res) {
 
 // Get list of images
 exports.show = function(req, res) {
-  console.log('hola');
-
-  gm('/Users/flatline/src/proyectos/killmenos9/server/api/image/carta.png')
+  gm('./client/assets/images/notificaciones/carta.jpg')
   .stroke("#000000")
-  .font("Helvetica.ttf", 80)
-  .drawText(10, 10, "hola  que pasa ")
-  .write("/Users/flatline/src/experimentos/create_img/carta.png", function (err) {
+  .font("Helvetica.ttf", 16)
+  .drawText(164, 388, req.query.patron)
+  .drawText(164, 560, req.query.name)
+  .drawText(221, 602, req.query.palabras)
+  .drawText(164, 644, req.query.fraseOrig)
+  .drawText(140, 700, req.query.fecha)
+  .write("./client/assets/images/notificaciones/"+req.query.name+".png", function (err) {
     if(err){
       console.log(err);
     }else{
       console.log('bien');
     }
   });
-  // res.json();
+ res.json({name:req.query.name});
 };

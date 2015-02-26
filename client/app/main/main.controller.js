@@ -170,7 +170,7 @@ angular.module('killmenos9App')
           }, 2000);
           var timeDrones = $timeout(function() {
             $scope.textoDrone = '';
-            $scope.videoObjeto = $sce.trustAsHtml('<video width="370" autoplay><source src="/assets/video/drone_small.mp4" type="video/mp4"></video>');
+            //g$scope.videoObjeto = $sce.trustAsHtml('<video width="370" autoplay><source src="/assets/video/drone_small.mp4" type="video/mp4" muted></video>');
           }, 4000);
 
         }
@@ -208,12 +208,20 @@ angular.module('killmenos9App')
         params: {
             name: obj.name,
             id: obj.id,
-            text: obj.text,
-            palabras: obj.palabras
+            fraseOrig: obj.fraseOrig,
+            palabras: obj.palabras,
+            patron: $scope.selection,
+            fecha: obj.fecha
         }
      })
      .success(function (data) {
-          $scope.info_show = data
+      console.log(data);
+       $scope.notificacionImg = data.name;
+        var dialog = ngDialog.open({
+          template: 'notificacion',
+          className: 'ngdialog-theme-kill',
+          scope: $scope
+        });
      });
 
     };
