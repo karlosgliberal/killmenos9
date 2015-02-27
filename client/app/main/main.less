@@ -35,7 +35,7 @@
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  animation: type 4s steps(60, end); 
+  animation: type 3s steps(80, end); 
 }
 
 .intro-uno span{
@@ -280,6 +280,137 @@
   background: #e0e0e0;
   color: #777;
 }
+
+
+
+// MODAL ANGULAR notificacion
+
+@-webkit-keyframes ngdialog-flyin {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-40px);
+    transform: translateY(-40px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@keyframes ngdialog-flyin {
+  0% {
+    opacity: 0;
+    -webkit-transform: translateY(-40px);
+    -ms-transform: translateY(-40px);
+    transform: translateY(-40px);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+@-webkit-keyframes ngdialog-flyout {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-40px);
+    transform: translateY(-40px);
+  }
+}
+
+@keyframes ngdialog-flyout {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translateY(-40px);
+    -ms-transform: translateY(-40px);
+    transform: translateY(-40px);
+  }
+}
+
+.ngdialog.ngdialog-theme-notificacion {
+  padding-bottom: 10px;
+  padding-top: 20px;
+}
+
+.ngdialog.ngdialog-theme-notificacion.ngdialog-closing .ngdialog-content {
+  -webkit-animation: ngdialog-flyout .5s;
+  animation: ngdialog-flyout .5s;
+}
+
+.ngdialog.ngdialog-theme-notificacion .ngdialog-content {
+  -webkit-animation: ngdialog-flyin .5s;
+  animation: ngdialog-flyin .5s;
+  background:@black;
+  border-radius: 5px;
+  color: #444;
+  font-family: 'Helvetica',sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 1em;
+  position: relative;
+  width: 800px;
+}
+ 
+.ngdialog.ngdialog-theme-notificacion .ngdialog-close {
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.ngdialog.ngdialog-theme-notificacion .ngdialog-close:before {
+  background: transparent;
+  border-radius: 3px;
+  color: #000;
+  content: '\00D7';
+  font-size: 26px;
+  font-weight: 400;
+  height: 30px;
+  line-height: 26px;
+  position: absolute;
+  right: 3px;
+  text-align: center;
+  top: 3px;
+  width: 30px;
+}
+
+.ngdialog.ngdialog-theme-notificacion .ngdialog-close:hover:before,
+.ngdialog.ngdialog-theme-notificacion .ngdialog-close:active:before {
+  color: #777;
+}
+
+.ngdialog.ngdialog-theme-notificacion .ngdialog-message {
+  margin-bottom: .5em;
+}
+
+.ngdialog.ngdialog-theme-notificacion .ngdialog-input {
+  margin-bottom: 1em;
+}
+
+
+
+
 // MEDIA OBJECT
 .media-body, .media-left, .media-right {
   display: table-cell;
@@ -539,6 +670,11 @@ body {
         visibility: hidden;
       }
     }
+.notificacion {
+  position:absolute;
+  top:0;
+  left: 0;
+}
 
 
 
