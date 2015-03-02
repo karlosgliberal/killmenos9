@@ -24,7 +24,6 @@ angular.module('killmenos9App')
           combo: $scope.listaPalabras[i].letra,
           description:$scope.listaPalabras[i] ,
           callback: function(data, hotkey) {
-            console.log(hotkey.description);
             hotkey.description.clase = 'metadato-activo';
             $scope.buscarPatron(hotkey.description.name);
           }
@@ -32,6 +31,14 @@ angular.module('killmenos9App')
       };
     }
     killHotKey();
+
+    hotkeys.add({
+      combo: 'z',
+      description: 'ejecutar',
+      callback: function() {
+        $scope.ejecutar();
+      }
+    });
     $scope.msg = '<p>MSG<span>_</span></p>'
 
     function errorDialog(message){
@@ -87,7 +94,7 @@ angular.module('killmenos9App')
         $scope.msg = '<p>LOCALIZANDO USUARIOS QUE HAN USADO LAS PALABRAS SELECCIONADAS <span>_</span> </p>';
         var timeRecoger = $timeout(function() {
           buscarTweets($scope.selection);
-        }, 10000);
+        }, 7000);
       }
     }
 
@@ -108,8 +115,8 @@ angular.module('killmenos9App')
           $scope.msg = '<p>COMPARANDO LOS TWEETS CON NUESTRO ALGORITMOS BUSCANDO COINCIDENCIAS <span>|</span></p>';
           var timeRecoger = $timeout(function() {
             recogerTweets(cajaUser);
-          }, 8000);
-        }, 9000);
+          }, 7000);
+        }, 7000);
       });
     }
 
