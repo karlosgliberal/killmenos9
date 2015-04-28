@@ -132,7 +132,7 @@ angular.module('killmenos9App')
             $scope.msg = '<p>KILL-9 ENVIANDO DRONES HACIA LOS OBJETIVOS<span>|</span></p>';
           }, 9000);
           var timeDrones = $timeout(function() {
-            $scope.videoObjeto = $sce.trustAsHtml('<video width="370" autoplay><source src="/assets/video/drone_small.mp4" type="video/mp4" muted></video>');
+            $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/video/dron.gif">');
           }, 8000);
 
         }
@@ -146,7 +146,7 @@ angular.module('killmenos9App')
       if($scope.controlEjecutar  == 0){
         $scope.ejecutar = 1;
         if($scope.objetivos.length == 0){
-          $scope.textoBuscando = '<p>KILL-9 ERROR NO TARGET, REBOOT... <span>|</span></p>';
+          $scope.textoBuscando = '<p>KILL-9 ERROR NO TARGET, REBOOT.. <span>|</span></p>';
           var timeTexto = $timeout(function() {
             $window.location.reload();
           }, 4000);
