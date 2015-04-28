@@ -103,16 +103,16 @@ angular.module('killmenos9App')
       $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
         console.log(listaUsuarios.length);
         if(listaUsuarios.length == 0){
-          errorDialog('KILL -9 PALABRAS NO COMBINADAS REBOOT...'); 
+          errorDialog('KILL -9 PALABRAS NO COMBINADAS, REBOOT...'); 
         }
         for (var i = listaUsuarios.length - 1; i >= 0; i--) {
           cajaUser.push(listaUsuarios[i].id);
         };
         $scope.porcentaje = 100;
         $scope.listaUsuarios = listaUsuarios;
-        $scope.msg = '<p>ANALIZANDO UN CONJUNTO DE TWEETS DE ESOS USUARIOS<span>|</span></p>';
+        $scope.msg = '<p>ANALIZANDO TWEETS DE USUARIOS<span>|</span></p>';
         var timeRecoger = $timeout(function() {
-          $scope.msg = '<p>COMPARANDO LOS TWEETS CON NUESTRO ALGORITMOS BUSCANDO COINCIDENCIAS <span>|</span></p>';
+          $scope.msg = '<p>COMPARANDO TWEETS CON NUESTRO ALGORITMO, BUSCANDO COINCIDENCIAS <span>|</span></p>';
           var timeRecoger = $timeout(function() {
             recogerTweets(cajaUser);
           }, 7000);
@@ -129,10 +129,10 @@ angular.module('killmenos9App')
         }else{
           $scope.msg = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
           var timePreparando = $timeout(function() {
-            $scope.msg = '<p>KILL-9 ENVIANDO DRONES HACIA LOS OBJETIVOS<span>|</span></p>';
+            $scope.msg = '<p>KILL-9 ENVIANDO DRON HACIA EL OBJETIVO<span>|</span></p>';
           }, 9000);
           var timeDrones = $timeout(function() {
-            $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/video/dron.gif">');
+            $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/video/dron.gif" width="37q0px">');
           }, 8000);
 
         }
