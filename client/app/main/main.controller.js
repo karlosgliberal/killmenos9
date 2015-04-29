@@ -89,7 +89,7 @@ angular.module('killmenos9App')
       }
 
       if($scope.selection.length >= 4){
-        errorDialog('KILL-9 ERROR MIN 4 WORD, REBOOT...');
+        errorDialog('KILL-9 ERROR MIN 4 WORD, REBOOT...<br><img src="assets/images/missile-error.gif">');
       }else{
         $scope.msg = '<p>LOCALIZANDO USUARIOS QUE HAN USADO LAS PALABRAS SELECCIONADAS <span>_</span> </p>';
         var timeRecoger = $timeout(function() {
