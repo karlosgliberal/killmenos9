@@ -39,10 +39,22 @@ angular.module('killmenos9App')
         $scope.ejecutar();
       }
     });
+
+    hotkeys.add({
+      combo: 'x',
+      description: 'misil',
+      callback: function() {
+        $scope.misil();
+      }
+    });
+    $scope.misil = function ejecutar(){
+      errorDialog('ERROR BOTON MISIL ACTIVADO, DESACTIVAR');
+    };
+
     $scope.msg = '<p>MSG<span>_</span></p>'
 
     function errorDialog(message){
-      $scope.errorMesaje = '<p class="mensaje-modal">'+ message +'<span>|</span></p>';;
+      $scope.errorMesaje = '<p class="mensaje-modal">'+ message +'<span>|</span></p>';
       var dialog = ngDialog.open({
         template: 'errorKill',
         className: 'ngdialog-theme-kill',
