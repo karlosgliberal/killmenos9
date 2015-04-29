@@ -48,7 +48,7 @@ angular.module('killmenos9App')
       }
     });
     $scope.misil = function ejecutar(){
-      errorDialog('ERROR BOTON MISIL ACTIVADO, DESACTIVAR');
+      errorDialog('ERROR BOTON MISIL ACTIVADO, DESACTIVAR<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
     };
 
     $scope.msg = '<p>MSG<span>_</span></p>'
@@ -101,7 +101,7 @@ angular.module('killmenos9App')
       }
 
       if($scope.selection.length >= 4){
-        errorDialog('KILL-9 ERROR MIN 4 WORD, REBOOT...<br><img src="assets/images/missile-error.gif">');
+        errorDialog('KILL-9 ERROR MIN 4 WORD, REBOOT...');
       }else{
         $scope.msg = '<p>LOCALIZANDO USUARIOS QUE HAN USADO LAS PALABRAS SELECCIONADAS <span>_</span> </p>';
         var timeRecoger = $timeout(function() {
@@ -122,7 +122,7 @@ angular.module('killmenos9App')
         };
         $scope.porcentaje = 100;
         $scope.listaUsuarios = listaUsuarios;
-        $scope.msg = '<p>ANALIZANDO TWEETS DE USUARIOS<span>|</span></p>';
+        $scope.msg = '<p>ANALIZANDO TWEETS<span>|</span></p>';
         var timeRecoger = $timeout(function() {
           $scope.msg = '<p>COMPARANDO TWEETS CON NUESTRO ALGORITMO, BUSCANDO COINCIDENCIAS <span>|</span></p>';
           var timeRecoger = $timeout(function() {
@@ -144,7 +144,7 @@ angular.module('killmenos9App')
             $scope.msg = '<p>KILL-9 ENVIANDO DRON HACIA EL OBJETIVO<span>|</span></p>';
           }, 9000);
           var timeDrones = $timeout(function() {
-            $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/video/dron.gif" width="37q0px">');
+            $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/video/dron.gif" width="374px">');
           }, 8000);
 
         }
