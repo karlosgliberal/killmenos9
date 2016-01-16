@@ -2,11 +2,11 @@
 
 angular.module('killmenos9App')
   .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys, $routeParams, ngDialog) {
-  
+
     $scope.listaPalabras = [
       {name:"pamplona", id:1, clase:'metadato-palabra', letra:'a'},
       {name:"desahucios", id:2, clase:'metadato-palabra', letra:'s'},
-      {name:"crisis", id:3, clase:'metadato-palabra', letra:'d'}, 
+      {name:"crisis", id:3, clase:'metadato-palabra', letra:'d'},
       {name:"ramplona", id:5, clase:'metadato-palabra', letra:'f'},
       {name:"madrid", id:6, clase:'metadato-palabra', letra:'g'},
     ];
@@ -17,7 +17,7 @@ angular.module('killmenos9App')
     $scope.objetivos = [];
     $scope.porcentaje = 0;
     $scope.controlEjecutar = 0;
-    
+
     function killHotKey(){
       for (var i = $scope.listaPalabras.length - 1; i >= 0; i--) {
         hotkeys.add({
@@ -193,7 +193,7 @@ angular.module('killmenos9App')
        $scope.notificacionImg = data.name;
         var dialog = ngDialog.open({
           template: 'notificacion',
-          overlay: false, 
+          overlay: false,
           showClose: false,
           className: 'ngdialog-theme-notificacion',
           scope: $scope

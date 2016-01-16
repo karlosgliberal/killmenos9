@@ -76,6 +76,7 @@ exports.show = function(req, res){
             frase = textSpan;
           }
            var span = '<span class="seleccionado">'+ resultado[u] +'</span>';
+           //var span = resultado[u];
            textSpan = frase.replace(resultado[u], span);
          }
          paraEnviar.push({

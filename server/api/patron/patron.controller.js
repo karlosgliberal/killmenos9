@@ -34,12 +34,24 @@ exports.show = function(req, res){
 
   twitter.get('search/tweets', params, function(err, data, resp){
     var datos = [];
-    var tweets = data.statuses; 
+    var tweets = data.statuses;
     var i = 0, len = tweets.length;
     for(i; i < len; i++) {
       datos.push({id:tweets[i].user.id, img:tweets[i].user.profile_image_url,name:tweets[i].user.screen_name});
     }
-    console.log('uuarios', datos.length);
-    res.json(datos);
+
+    function arrUnique(arr) {
+      var cleaned = [];
+      arr.forEach(function(itm) {
+          var unique = true;
+          cleaned.forEach(function(itm2) {
+              if (_.isEqual(itm, itm2)) unique = false;
+          });
+          if (unique)  cleaned.push(itm);
+      });
+      return cleaned;
+    }
+    var uniqueStandards = arrUnique(datos);
+    res.json(uniqueStandards);
   });
 };
