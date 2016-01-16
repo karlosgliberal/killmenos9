@@ -12,9 +12,9 @@
 var Twit = require('twit');
 var _ = require('lodash');
 var sets = require('simplesets');
-var config  = require('../../config/killmenos9'); 
+var config  = require('../../config/killmenos9');
 var async = require('async');
-var fs = require('fs') 
+var fs = require('fs')
 var gm = require('gm');
 
 var twitter = new Twit(config.twitter);
@@ -30,18 +30,18 @@ exports.show = function(req, res){
   var datos = [];
   var listaUsuarios = req.params.id
   var users_id = listaUsuarios.split(',');
-  var i = 0, len = users_id.length; 
+  var i = 0, len = users_id.length;
 
   async.each(users_id,
     function(userId, callback){
       twitter.get('statuses/user_timeline', {user_id:userId, exclude_replies:true, count:4, include_rts:false}, function(err, data, resp){
         var tweets = data;
-        var i = 0, len = tweets.length; 
+        var i = 0, len = tweets.length;
         for(i; i < len; i++) {
           datos.push({
-            name:tweets[i].user.screen_name, 
-            id:tweets[i].user.id, 
-            text:tweets[i].text, 
+            name:tweets[i].user.screen_name,
+            id:tweets[i].user.id,
+            text:tweets[i].text,
             img:tweets[i].user.profile_image_url,
             fecha:tweets[i].created_at
           });
@@ -61,11 +61,11 @@ exports.show = function(req, res){
 
     for(i; i < len; i++){
       var frase = datos[i].text;
+      console.log(frase);
       var texto = frase.split(' ');
       var s1 = new sets.Set(texto);
       var resultado =  s1.intersection(s2).array();
       if(resultado.length > 1){
-         console.log('text', datos[i]);
          console.log('Intersection:', s1.intersection(s2).array());
          var u = 0, lenr = resultado.length;
          var textSpan;
@@ -75,8 +75,8 @@ exports.show = function(req, res){
           } else {
             frase = textSpan;
           }
+           //var conSpan = frase.search("span class");
            var span = '<span class="seleccionado">'+ resultado[u] +'</span>';
-           //var span = resultado[u];
            textSpan = frase.replace(resultado[u], span);
          }
          paraEnviar.push({
@@ -92,6 +92,7 @@ exports.show = function(req, res){
       }else{
       }
     }
+    console.log(paraEnviar);
     res.json(paraEnviar);
   }
 
