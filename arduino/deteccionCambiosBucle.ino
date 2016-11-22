@@ -25,20 +25,17 @@ int lastButtonStateMisil   = 0;
 
 void setup() {
   delay(2000);
-  FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS);
   FastLED.addLeds<WS2801, DATA_PIN_ART, CLOCK_PIN_ART, RGB>(leds_art, NUM_LEDS_ART);
-   Serial.begin(9600); 
+   Serial.begin(9600);
    for (int i=0; i < 5; i++){
      pinMode(buttons[i], INPUT);
      Serial.println(buttons[i]);
    }
    pinMode(buttonMisil, INPUT);
-
 }
 
 
 void loop() {
-  //rainbow_fade();
   for (int i=0; i < 5; i++){
     buttonState[i] = digitalRead(buttons[i]);
   }
@@ -49,9 +46,6 @@ void loop() {
   botones(3);
   botones(4);
   misil();
-  //intensidad();
-  //rainbow_fade();
-  
 }
 
 
@@ -64,19 +58,19 @@ void botones(int i) {
       Serial.println(buttonPushCounter[i]);
       Serial.print("el numero de boton:  ");
       Serial.println(i);
-    } 
+    }
     else {
-      Serial.println("off"); 
+      Serial.println("off");
     }
   }
   lastButtonState[i] = buttonState[i];
   if (buttonPushCounter[i] % 2 == 0) {
     leds_art[i] = 0x006400;
-    leds_art[i].fadeLightBy( 64 ); 
+    leds_art[i].fadeLightBy( 64 );
     LEDS.show();
   } else {
     leds_art[i] = 0xFF0000;
-    leds_art[i].fadeLightBy( 64 ); 
+    leds_art[i].fadeLightBy( 64 );
     LEDS.show();
   }
 }
@@ -91,28 +85,27 @@ void misil() {
   if (buttonStateMisil != lastButtonStateMisil) {
     if (buttonStateMisil == HIGH && pulsado == false) {
       buttonPushCounterMisil++;
-      Serial.print("el numero de boton:  ");
-      Serial.println("Misil");
       Serial.println("Poner seguridad");
       leds_art[0] = 0x000000;
       LEDS.show();
-      delay(400);  
+      delay(400);
       leds_art[1] = 0x000000;
       LEDS.show();
-      delay(400);      
+      delay(400);
       leds_art[2] = 0x000000;
       LEDS.show();
-      delay(400);      
+      delay(400);
       leds_art[3] = 0x000000;
       LEDS.show();
-      delay(400);      
-      leds_art[4] = 0x000000;      
-      LEDS.show();          
-      delay(400);      
-      asm volatile ("  jmp 0");   
-    } 
+      delay(400);
+      leds_art[4] = 0x000000;
+      LEDS.show();
+      delay(400);
+      asm volatile ("  jmp 0");
+    }
     else {
-      Serial.println("Misil sin seguridad");
+      Serial.print("el numero de boton:  ");
+      Serial.println("Misil");
       delay(3000);
     }
   }
@@ -120,33 +113,4 @@ void misil() {
   if (buttonPushCounterMisil % 2 == 0) {
   } else {
   }
-}  
-  
-void rainbow_fade() {                         //-m2-FADE ALL LEDS THROUGH HSV RAINBOW
-    for(int i=0; i<25; i++) {
-      ihue++;
-      if (ihue > 255) {ihue = 0;}
-      for(int idex = 0 ; idex < NUM_LEDS; idex++ ) {
-        Serial.println(idex);
-        leds[idex] = CHSV(ihue, 255, 255);
-      }
-      LEDS.show();    
-      delay(40);
-    }
 }
-
-void intensidad(){
-  for(int i = 0; i < NUM_LEDS; i++) { 
-    leds[i] = 0xFF0000;  
-    FastLED.show();
-  }
-  delay(30);
-}
-
-  
-
-
-
-
-
-
