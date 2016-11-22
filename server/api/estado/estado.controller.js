@@ -9,6 +9,7 @@ var estado = 0;
 // Get list of images
 exports.index = function(req, res) {
   res.json({estado:estado});
+  estado = 0;
 };
 
 // Get list of images

@@ -22,9 +22,6 @@ angular.module('killmenos9App')
       errorDialog('KILL -9 SESION TERMINADA: MANTENIMIENTO');
     }, 300000);
 
-    $http.get('/api/estado/cambiar').success(function(estado) {
-      console.log(estado);
-    });
 
     function killHotKey(){
       for (var i = $scope.listaPalabras.length - 1; i >= 0; i--) {
@@ -49,6 +46,14 @@ angular.module('killmenos9App')
     });
 
     hotkeys.add({
+      combo: 'c',
+      description: 'reset',
+      callback: function() {
+        $scope.reset();
+      }
+    });
+
+    hotkeys.add({
       combo: 'x',
       description: 'misil',
       callback: function() {
@@ -60,6 +65,10 @@ angular.module('killmenos9App')
       errorDialog('ERROR BOTON MISIL ACTIVADO, DESACTIVAR<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
     };
 
+    $scope.reset = function reset(){
+      errorDialog('ERROR DEMASIADAS SELECCIONES');
+    };
+
     $scope.msg = '<p>MSG<span>_</span></p>'
 
     function errorDialog(message){
@@ -68,6 +77,9 @@ angular.module('killmenos9App')
         template: 'errorKill',
         className: 'ngdialog-theme-kill',
         scope: $scope
+      });
+      $http.get('/api/estado/cambiar').success(function(estado) {
+        console.log(estado);
       });
       var timeTexto = $timeout(function() {
         $window.location.reload();
