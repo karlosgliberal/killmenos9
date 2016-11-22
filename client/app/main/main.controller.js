@@ -86,6 +86,15 @@ angular.module('killmenos9App')
       }, 5500);
     }
 
+    function misilDialog(message){
+      $scope.errorMesaje = '<p class="mensaje-modal">'+ message +'<span>|</span></p>';
+      var dialog = ngDialog.open({
+        template: 'misilKill',
+        className: 'ngdialog-theme-kill',
+        scope: $scope
+      });
+    }
+
     var stop;
     $scope.contadorPorcentaje = function contadorPorcentaje() {
       if ( angular.isDefined(stop) ) return;
@@ -164,9 +173,11 @@ angular.module('killmenos9App')
             $scope.msg = '<p>KILL-9 ENVIANDO DRON HACIA EL OBJETIVO<span>|</span></p>';
           }, 9000);
           var timeDrones = $timeout(function() {
-            $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/video/dron.gif" width="374px">');
+            $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/images/dron.gif" width="374px">');
           }, 8000);
-
+          var timeMisilDialog = $timeout(function(){
+            misilDialog('MUERTE Y DESTRUCCIÓN<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
+          }, 12000);
         }
         var timeoutSacarObjetivos = $timeout(function(){
           $scope.objetivos = resAlgoritmo;
