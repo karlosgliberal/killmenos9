@@ -11,8 +11,9 @@ module.exports = function(app) {
   // Insert routes below
   app.use('/api/images', require('./api/image'));
   app.use('/api/patron', require('./api/patron'));
+  app.use('/api/estado', require('./api/estado'));
   app.use('/api/recogerTweets', require('./api/recogerTweets'));
-  
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

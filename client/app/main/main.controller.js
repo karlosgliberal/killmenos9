@@ -18,6 +18,14 @@ angular.module('killmenos9App')
     $scope.porcentaje = 0;
     $scope.controlEjecutar = 0;
 
+    var timeMantenimineto = $timeout(function(){
+      errorDialog('KILL -9 SESION TERMINADA: MANTENIMIENTO');
+    }, 300000);
+
+    $http.get('/api/estado/cambiar').success(function(estado) {
+      console.log(estado);
+    });
+
     function killHotKey(){
       for (var i = $scope.listaPalabras.length - 1; i >= 0; i--) {
         hotkeys.add({
@@ -47,6 +55,7 @@ angular.module('killmenos9App')
         $scope.misil();
       }
     });
+
     $scope.misil = function ejecutar(){
       errorDialog('ERROR BOTON MISIL ACTIVADO, DESACTIVAR<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
     };
@@ -113,9 +122,8 @@ angular.module('killmenos9App')
     function buscarTweets(palabras){
       var cajaUser = [];
       $http.get('/api/patron/'+palabras).success(function(listaUsuarios) {
-        console.log(listaUsuarios.length);
         if(listaUsuarios.length == 0){
-          errorDialog('KILL -9 PALABRAS NO COMBINADAS, REBOOT...'); 
+          errorDialog('KILL -9 PALABRAS NO COMBINADAS, REBOOT...');
         }
         for (var i = listaUsuarios.length - 1; i >= 0; i--) {
           cajaUser.push(listaUsuarios[i].id);
@@ -189,8 +197,8 @@ angular.module('killmenos9App')
         }
      })
      .success(function (data) {
-      console.log(data);
        $scope.notificacionImg = data.name;
+       var timeDialog = $timeout(function(){
         var dialog = ngDialog.open({
           template: 'notificacion',
           overlay: false,
@@ -198,7 +206,10 @@ angular.module('killmenos9App')
           className: 'ngdialog-theme-notificacion',
           scope: $scope
         });
+       }, 2000);
+       var timeFin = $timeout(function(){
+         errorDialog('KILL -9 SESION TERMINADA: REINICIO');
+       }, 10000);
      });
-
     };
   });

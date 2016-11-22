@@ -103,7 +103,7 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/assets/images/{,*//*}*.{png,jpg,jpeg,gif,webp,svg}'
         ],
         options: {
-          livereload: true
+          livereload: false
         }
       },
       express: {
@@ -112,7 +112,7 @@ module.exports = function (grunt) {
         ],
         tasks: ['express:dev', 'wait'],
         options: {
-          livereload: true,
+          livereload: false,
           nospawn: true //Without this option specified express won't be reloaded
         }
       }
@@ -570,7 +570,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:less', 
+        'injector:less',
         'concurrent:server',
         'injector',
         'wiredep',
@@ -582,7 +582,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:less', 
+      'injector:less',
       'concurrent:server',
       'injector',
       'wiredep',
@@ -612,7 +612,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:less', 
+        'injector:less',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -625,7 +625,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:less', 
+        'injector:less',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -643,7 +643,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:less', 
+    'injector:less',
     'concurrent:dist',
     'injector',
     'wiredep',

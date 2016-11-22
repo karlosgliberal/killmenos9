@@ -21,9 +21,7 @@ exports.show = function(req, res) {
   .drawText(140, 700, req.query.fecha)
   .write("./client/assets/images/notificaciones/"+req.query.name+".png", function (err) {
     if(err){
-      console.log(err);
     }else{
-      console.log('bien');
     }
   });
  res.json({name:req.query.name});

@@ -61,12 +61,11 @@ exports.show = function(req, res){
 
     for(i; i < len; i++){
       var frase = datos[i].text;
-      console.log(frase);
       var texto = frase.split(' ');
       var s1 = new sets.Set(texto);
       var resultado =  s1.intersection(s2).array();
       if(resultado.length > 1){
-         console.log('Intersection:', s1.intersection(s2).array());
+         //console.log('Intersection:', s1.intersection(s2).array());
          var u = 0, lenr = resultado.length;
          var textSpan;
          for(u; u < lenr; u++){
@@ -81,18 +80,17 @@ exports.show = function(req, res){
          }
          paraEnviar.push({
           fraseOrig: datos[i].text,
-          name:datos[i].name, 
-          id:datos[i].id, 
-          text:textSpan, 
-          img:datos[i].img, 
+          name:datos[i].name,
+          id:datos[i].id,
+          text:textSpan,
+          img:datos[i].img,
           total:datos.length,
           fecha:datos[i].fecha,
-          palabras: resultado,  
+          palabras: resultado,
           clase:'clase ' + i});
       }else{
       }
     }
-    console.log(paraEnviar);
     res.json(paraEnviar);
   }
 
