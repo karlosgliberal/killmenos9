@@ -33,23 +33,23 @@ exports.show = function(req, res) {
     }else{
     }
   });
-  var nombre = req.query.name;
-  var b64content = fs.readFileSync(pathImage + nombre +'.png', { encoding: 'base64' })
-
-// first we must post the media to Twitter
-  twitter.post('media/upload', { media_data: b64content }, function (err, data, response) {
-  // now we can assign alt text to the media, for use by screen readers and
-  // other text-based presentations and interpreters
-  var mediaIdStr = data.media_id_string
-  console.log(mediaIdStr);
-  var altText = "Subiendo fotos."
-  var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } }
-  console.log(meta_params);
-  var params = { status: 'Search and destroy @patxangas @aitor_rl ' + nombre + ' .', media_ids: [mediaIdStr] }
-  twitter.post('statuses/update', params, function (err, data, response) {
-    console.log(data)
-    if(err) console.log(err);
-  })
- })
+//   var nombre = req.query.name;
+//   var b64content = fs.readFileSync(pathImage + nombre +'.png', { encoding: 'base64' })
+//
+// // first we must post the media to Twitter
+//   twitter.post('media/upload', { media_data: b64content }, function (err, data, response) {
+//   // now we can assign alt text to the media, for use by screen readers and
+//   // other text-based presentations and interpreters
+//   var mediaIdStr = data.media_id_string
+//   console.log(mediaIdStr);
+//   var altText = "Subiendo fotos."
+//   var meta_params = { media_id: mediaIdStr, alt_text: { text: altText } }
+//   console.log(meta_params);
+//   var params = { status: 'Search and destroy @patxangas @aitor_rl ' + nombre + ' .', media_ids: [mediaIdStr] }
+//   twitter.post('statuses/update', params, function (err, data, response) {
+//     console.log(data)
+//     if(err) console.log(err);
+//   })
+//  })
  res.json({name:req.query.name});
 };

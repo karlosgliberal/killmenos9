@@ -207,7 +207,8 @@ angular.module('killmenos9App')
       }
     }
 
-    $scope.generarImagen = function generarImagen(obj){
+
+   $scope.generarImagen = function generarImagen(obj){
       var objeto = angular.toJson(obj);
       var parametro =
       $http
@@ -233,8 +234,11 @@ angular.module('killmenos9App')
         });
       }, 4000);
        var timeFin = $timeout(function(){
+         $http.get('/api/crearTweets/crear',{params:{name:data.name}}).success(function(data){
+           console.log(data);
+         });
          errorDialog('KILL -9 ENVIO NOTIFICACIóN: REINICIO');
-       }, 40000);
+       }, 30000);
      });
     };
   });
