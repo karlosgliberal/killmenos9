@@ -4,11 +4,11 @@ angular.module('killmenos9App')
   .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys, $routeParams, ngDialog) {
 
     $scope.listaPalabras = [
-      {name:"pamplona", id:1, clase:'metadato-palabra', letra:'a'},
-      {name:"desahucios", id:2, clase:'metadato-palabra', letra:'s'},
+      {name:"refugiados", id:1, clase:'metadato-palabra', letra:'a'},
+      {name:"democracia", id:2, clase:'metadato-palabra', letra:'s'},
       {name:"crisis", id:3, clase:'metadato-palabra', letra:'d'},
-      {name:"ramplona", id:5, clase:'metadato-palabra', letra:'f'},
-      {name:"madrid", id:6, clase:'metadato-palabra', letra:'g'},
+      {name:"amor", id:5, clase:'metadato-palabra', letra:'f'},
+      {name:"pamplona", id:6, clase:'metadato-palabra', letra:'g'},
     ];
 
     $scope.listaUsuarios = [];
