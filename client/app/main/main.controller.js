@@ -177,11 +177,11 @@ angular.module('killmenos9App')
           }, 8000);
           var timeMisilDialog = $timeout(function(){
             misilDialog('MUERTE Y DESTRUCCIÓN<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
-          }, 12000);
+          }, 14000);
         }
         var timeoutSacarObjetivos = $timeout(function(){
           $scope.objetivos = resAlgoritmo;
-        }, 9000);
+        }, 11000);
       });
     }
 
@@ -231,10 +231,10 @@ angular.module('killmenos9App')
           className: 'ngdialog-theme-notificacion',
           scope: $scope
         });
-       }, 2000);
+      }, 4000);
        var timeFin = $timeout(function(){
-         errorDialog('KILL -9 SESION TERMINADA: REINICIO');
-       }, 30000);
+         errorDialog('KILL -9 ENVIO NOTIFICACIóN: REINICIO');
+       }, 40000);
      });
     };
   });
