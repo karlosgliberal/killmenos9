@@ -11,6 +11,7 @@ var estado = 0;
 
 // Get list of images
 exports.index = function(req, res) {
+  console.log(process.env.NODE_ENV);
   res.json('loco');
   estado = 0;
 };
