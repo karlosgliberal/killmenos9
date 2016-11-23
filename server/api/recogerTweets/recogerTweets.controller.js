@@ -35,6 +35,7 @@ exports.show = function(req, res){
   async.each(users_id,
     function(userId, callback){
       twitter.get('statuses/user_timeline', {user_id:userId, exclude_replies:true, count:4, include_rts:false}, function(err, data, resp){
+        if(!err){
         var tweets = data;
         var i = 0, len = tweets.length;
         for(i; i < len; i++) {
@@ -47,6 +48,7 @@ exports.show = function(req, res){
           });
         }
         callback();
+      }
       })
     },
     function(err){

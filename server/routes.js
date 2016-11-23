@@ -12,6 +12,7 @@ module.exports = function(app) {
   app.use('/api/images', require('./api/image'));
   app.use('/api/patron', require('./api/patron'));
   app.use('/api/estado', require('./api/estado'));
+  app.use('/api/crearTweets', require('./api/crearTweets'));
   app.use('/api/recogerTweets', require('./api/recogerTweets'));
 
   // All undefined asset or api routes should return a 404

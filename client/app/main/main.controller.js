@@ -88,7 +88,7 @@ angular.module('killmenos9App')
 
     function misilDialog(message){
       $scope.errorMesaje = '<p class="mensaje-modal">'+ message +'<span>|</span></p>';
-      var dialog = ngDialog.open({
+      $scope.misilDialog = ngDialog.open({
         template: 'misilKill',
         className: 'ngdialog-theme-kill',
         scope: $scope
@@ -191,9 +191,10 @@ angular.module('killmenos9App')
         if($scope.objetivos.length == 0){
           $scope.textoBuscando = '<p>KILL-9 ERROR NO TARGET, REBOOT.. <span>|</span></p>';
           var timeTexto = $timeout(function() {
-            $window.location.reload();
+            errorDialog('<p>KILL-9 ERROR NO TARGET, REBOOT.. <span>|</span></p>');
           }, 4000);
         }else{
+          $scope.misilDialog.close();
           var randNumber = Math.floor((Math.random() * $scope.objetivos.length  ) + 0);
           $scope.msg = '<p>KILL-9 OBJETIVO SELECIONADO <span>|</span></p>';
           var timeseleccionado = $timeout(function() {
@@ -208,6 +209,7 @@ angular.module('killmenos9App')
 
     $scope.generarImagen = function generarImagen(obj){
       var objeto = angular.toJson(obj);
+      var parametro =
       $http
         .get('/api/images/crear', {
         params: {
@@ -232,7 +234,7 @@ angular.module('killmenos9App')
        }, 2000);
        var timeFin = $timeout(function(){
          errorDialog('KILL -9 SESION TERMINADA: REINICIO');
-       }, 10000);
+       }, 30000);
      });
     };
   });
