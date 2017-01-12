@@ -3,12 +3,33 @@
 angular.module('killmenos9App')
   .controller('MainCtrl', function ($scope, $http, $timeout, $window, $interval, $sce, hotkeys, $routeParams, ngDialog) {
 
+    function getRandom(arr, n) {
+        var result = new Array(n),
+            len = arr.length,
+            taken = new Array(len);
+        if (n > len)
+            throw new RangeError("getRandom: more elements taken than available");
+        while (n--) {
+            var x = Math.floor(Math.random() * len);
+            result[n] = arr[x in taken ? taken[x] : x];
+            taken[x] = --len;
+        }
+        return result;
+    }
+
+    var palabras = ["pensiones", "machineLearning", "drone", "laPAH", "bigData","refugiados", "conflicto"
+, "desahucios", "democracia", "ibex35", "pobreza", "explotacion", "paro", "crisis", "tortura"
+, "osasuna", "migrantes", "hipocresía", "sentencia", "propiedad", "intelectual", "amor", "dut", "nachoVegas"
+, "durruti", "taz", "feminismo", "anarquía", "liberal", "marte", "interzonas", "aitor", "karlos", "miren"
+, "pamplona", "madrid", "barcelona", "siria", "sarriguren", "inditex", "cocacola", "LSD", "obama", "trump", "Rajoy", "podemos", "ciudadanos", "ppsoe"];
+
+    var palabrasRandom = getRandom(palabras, 5);
     $scope.listaPalabras = [
-      {name:"refugiados", id:1, clase:'metadato-palabra', letra:'a'},
-      {name:"democracia", id:2, clase:'metadato-palabra', letra:'s'},
-      {name:"crisis", id:3, clase:'metadato-palabra', letra:'d'},
-      {name:"amor", id:5, clase:'metadato-palabra', letra:'f'},
-      {name:"pamplona", id:6, clase:'metadato-palabra', letra:'g'},
+      {name:palabrasRandom[0], id:1, clase:'metadato-palabra', letra:'a'},
+      {name:palabrasRandom[1], id:2, clase:'metadato-palabra', letra:'s'},
+      {name:palabrasRandom[2], id:3, clase:'metadato-palabra', letra:'d'},
+      {name:palabrasRandom[3], id:5, clase:'metadato-palabra', letra:'f'},
+      {name:palabrasRandom[4], id:6, clase:'metadato-palabra', letra:'g'},
     ];
 
     $scope.listaUsuarios = [];
@@ -62,6 +83,7 @@ angular.module('killmenos9App')
       }
     });
 
+    $scope.palabrasRandomTxt = '<p class="mensaje-modal">1- '+ palabrasRandom[0] +' 2- '+ palabrasRandom[1] +' 3- '+ palabrasRandom[2] +' 4- '+ palabrasRandom[3] +' 5- '+ palabrasRandom[4] +'<span>|</span></p>';
     $scope.misilDialogMensaje = ngDialog.open({
       template: 'mensaje',
       overlay: false,
@@ -185,7 +207,7 @@ angular.module('killmenos9App')
             $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/images/dron.gif" width="374px">');
           }, 8000);
           var timeMisilDialog = $timeout(function(){
-            misilDialog('MUERTE Y DESTRUCCIÓN<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
+            misilDialog('MUERTE Y DESTRUCCION<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
           }, 14000);
         }
         var timeoutSacarObjetivos = $timeout(function(){
