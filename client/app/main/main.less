@@ -409,6 +409,71 @@
 }
 
 
+//mesaje
+.ngdialog.ngdialog-theme-mensaje {
+  padding-bottom: 190px;
+  padding-top: 200px;
+}
+
+.ngdialog.ngdialog-theme-mensaje.ngdialog-closing .ngdialog-content {
+  -webkit-animation: ngdialog-flyout .5s;
+  animation: ngdialog-flyout .5s;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-content {
+  -webkit-animation: ngdialog-flyin .5s;
+  animation: ngdialog-flyin .5s;
+  background:@black;
+  border-radius: 5px;
+  color: #444;
+  font-family: 'Helvetica',sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 1em;
+  position: relative;
+  width: 800px;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close {
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close:before {
+  background: transparent;
+  border-radius: 3px;
+  color: #000;
+  content: '\00D7';
+  font-size: 26px;
+  font-weight: 400;
+  height: 30px;
+  line-height: 26px;
+  position: absolute;
+  right: 3px;
+  text-align: center;
+  top: 3px;
+  width: 30px;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close:hover:before,
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close:active:before {
+  color: #777;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-message {
+  margin-bottom: .5em;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-input {
+  margin-bottom: 1em;
+}
+
+
 
 
 // MEDIA OBJECT
@@ -679,9 +744,4 @@ body {
 
 .img-center {
   text-align: center;
-}
-
-.test {
-  padding: 3px;
-  max-resolution: 3px;
 }

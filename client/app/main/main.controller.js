@@ -29,6 +29,7 @@ angular.module('killmenos9App')
           combo: $scope.listaPalabras[i].letra,
           description:$scope.listaPalabras[i] ,
           callback: function(data, hotkey) {
+            ngDialog.closeAll();
             hotkey.description.clase = 'metadato-activo';
             $scope.buscarPatron(hotkey.description.name);
           }
@@ -59,6 +60,14 @@ angular.module('killmenos9App')
       callback: function() {
         $scope.misil();
       }
+    });
+
+    $scope.misilDialogMensaje = ngDialog.open({
+      template: 'mensaje',
+      overlay: false,
+      showClose: false,
+      className: 'ngdialog-theme-mensaje',
+      scope: $scope
     });
 
     $scope.misil = function ejecutar(){
