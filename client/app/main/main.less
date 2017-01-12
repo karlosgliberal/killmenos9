@@ -1,8 +1,8 @@
-// KILL - 9 
+// KILL - 9
 // THE FIRST MACHINE OF FLMT
 
 
-// COLORES 
+// COLORES
 @green: #77B8AB;
 @red: #7D412E;
 @white: #fff;
@@ -29,13 +29,13 @@
 
 .intro-uno p{
   color: @red;
-  font-family:@data; 
+  font-family:@data;
   font-size: 20px;
   margin: 10px 0 0 10px;
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
-  animation: type 3s steps(80, end); 
+  animation: type 3s steps(80, end);
 }
 
 .intro-uno span{
@@ -45,14 +45,14 @@
 
 .intro-dos p{
   color: @green;
-  font-family:@data; 
+  font-family:@data;
   font-size: 23px;
   margin: 10px 0 0 10px;
   white-space: nowrap;
   overflow: hidden;
   width: 100%;
   padding: 12px;
-  animation: type 8s steps(60, end); 
+  animation: type 8s steps(60, end);
 }
 
 .intro-dos span{
@@ -60,15 +60,15 @@
   font-size: 25px;
 }
 
-@keyframes type{ 
-  from { width: 0; } 
-} 
+@keyframes type{
+  from { width: 0; }
+}
 
 @keyframes type2{
   0%{width: 0;}
   50%{width: 0;}
-  100%{ width: 100; } 
-} 
+  100%{ width: 100; }
+}
 
 @keyframes blink-uno{
   to{opacity: .0;}
@@ -169,7 +169,7 @@
   width: 450px;
   border: 4px solid @red;
 }
- 
+
 .ngdialog.ngdialog-theme-kill .ngdialog-close {
   border-radius: 5px;
   cursor: pointer;
@@ -370,7 +370,7 @@
   position: relative;
   width: 800px;
 }
- 
+
 .ngdialog.ngdialog-theme-notificacion .ngdialog-close {
   border-radius: 5px;
   cursor: pointer;
@@ -405,6 +405,71 @@
 }
 
 .ngdialog.ngdialog-theme-notificacion .ngdialog-input {
+  margin-bottom: 1em;
+}
+
+
+//mesaje
+.ngdialog.ngdialog-theme-mensaje {
+  padding-bottom: 190px;
+  padding-top: 200px;
+}
+
+.ngdialog.ngdialog-theme-mensaje.ngdialog-closing .ngdialog-content {
+  -webkit-animation: ngdialog-flyout .5s;
+  animation: ngdialog-flyout .5s;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-content {
+  -webkit-animation: ngdialog-flyin .5s;
+  animation: ngdialog-flyin .5s;
+  background:@black;
+  border-radius: 5px;
+  color: #444;
+  font-family: 'Helvetica',sans-serif;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  margin: 0 auto;
+  max-width: 100%;
+  padding: 1em;
+  position: relative;
+  width: 800px;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close {
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close:before {
+  background: transparent;
+  border-radius: 3px;
+  color: #000;
+  content: '\00D7';
+  font-size: 26px;
+  font-weight: 400;
+  height: 30px;
+  line-height: 26px;
+  position: absolute;
+  right: 3px;
+  text-align: center;
+  top: 3px;
+  width: 30px;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close:hover:before,
+.ngdialog.ngdialog-theme-mensaje .ngdialog-close:active:before {
+  color: #777;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-message {
+  margin-bottom: .5em;
+}
+
+.ngdialog.ngdialog-theme-mensaje .ngdialog-input {
   margin-bottom: 1em;
 }
 
@@ -502,7 +567,7 @@ body {
   background-color: @green;
   margin-top: 5px;
   padding: 15px;
-} 
+}
 
 
 //GENERAL
@@ -680,6 +745,3 @@ body {
 .img-center {
   text-align: center;
 }
-
-
-
