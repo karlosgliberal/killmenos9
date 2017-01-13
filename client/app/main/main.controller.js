@@ -19,9 +19,9 @@ angular.module('killmenos9App')
 
     var palabras = ["pensiones", "machineLearning", "drone", "laPAH", "bigData","refugiados", "conflicto"
 , "desahucios", "democracia", "ibex35", "pobreza", "explotacion", "paro", "crisis", "tortura"
-, "osasuna", "migrantes", "hipocresía", "sentencia", "propiedad", "intelectual", "amor", "dut", "nachoVegas"
-, "durruti", "taz", "feminismo", "anarquía", "liberal", "marte", "interzonas", "aitor", "karlos", "miren"
-, "pamplona", "madrid", "barcelona", "siria", "sarriguren", "inditex", "cocacola", "LSD", "obama", "trump", "Rajoy", "podemos", "ciudadanos", "ppsoe"];
+, "osasuna", "migrantes", "hipocresia", "sentencia", "propiedad", "intelectual", "amor", "dut", "nachoVegas"
+, "durruti", "taz", "feminismo", "anarquia", "liberal", "marte", "interzonas", "aitor", "karlos", "miren"
+, "pamplona", "madrid", "barcelona", "siria", "sarriguren", "inditex", "cocacola", "LSD", "obama", "trump", "Rajoy", "podemos", "ciudadanos", "ppsoe", "540"];
 
     var palabrasRandom = getRandom(palabras, 5);
     $scope.listaPalabras = [
@@ -41,7 +41,7 @@ angular.module('killmenos9App')
 
     var timeMantenimineto = $timeout(function(){
       errorDialog('KILL -9 SESION TERMINADA: MANTENIMIENTO');
-    }, 300000);
+    }, 250000);
 
 
     function killHotKey(){
@@ -201,11 +201,11 @@ angular.module('killmenos9App')
         }else{
           $scope.msg = '<p>KILL-9 GENERANDO LISTA DE OBJETIVOS <span>|</span></p>';
           var timePreparando = $timeout(function() {
-            $scope.msg = '<p>KILL-9 ENVIANDO DRON HACIA EL OBJETIVO<span>|</span></p>';
+            $scope.msg = '<p>KILL-9 ENVIANDO DRON HACIA LOS OBJETIVOS<span>|</span></p>';
           }, 9000);
           var timeDrones = $timeout(function() {
             $scope.videoObjeto = $sce.trustAsHtml('<img src="/assets/images/dron.gif" width="374px">');
-          }, 8000);
+          }, 9000);
           var timeMisilDialog = $timeout(function(){
             misilDialog('MUERTE Y DESTRUCCION<br><div class="img-center"><img src="assets/images/missile-error-verde.gif"></div>');
           }, 14000);

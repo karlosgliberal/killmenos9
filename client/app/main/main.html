@@ -20,16 +20,18 @@
 <script type="text/ng-template" id="mensaje">
   <div class="mensaje">
     <div>
-      <div class="titulo-container"><h3>Esta delante de Kill -9</h3></div>
+      <div class="titulo-container"><h3>Estas delante de Kill -9</h3></div>
       <div class="monk"></div>
       <p class="instru-uno">Kill -9 es una tecnologia de poder
       y tu eres su operador, tu controlas sus mandos. <p>
-      <p>Pulsando cualquiera de los botones(tres maximo) seleccionaras una de las palabras, entonces kill -9 entra en funcionamiento. <br><br>
+      <p>Pulsando cualquiera de los botones (tres maximo) seleccionaras una de las palabras, entonces kill -9 entra en funcionamiento. <br><br>
       Kill -9 busca personas que han usado esas palabras, mira en sus twits y los compara con su algoritmo para ver si hay coincidencias, para ver si hay alguna anomalia.<br><br>
-      En caso de encontrar alguna anomalía, kill -9 inicia el proceso “search and destroy” sigue las instrucciones. Kill -9 hará el resto</p><br>
+      En caso de encontrar alguna anomalia, kill -9 inicia el proceso “search and destroy”.</p></br>
+      <p>Sigue las instrucciones. Kill -9 hara el resto</p><br>
     </div>
-    <p class="instru-uno">Elige una de estas tres palabras <p>
+    <p class="instru-uno">Elige alguna de estas palabras <p>
     <div class="intro-uno texto-modal" ng-bind-html="palabrasRandomTxt"></div>
+    <br>
     <div class="monk"></div><strong></strong>
   </div>
 </script>
@@ -60,7 +62,7 @@
             <div ng-show="!listaUsuarios.length" class="intro-uno">
               <div class="intro-uno" ng-bind-html="textoBuscando"></div>
             </div>
-          <div class="col-sm-2" ng-repeat="usuario in listaUsuarios">
+          <div class="col-sm-2" ng-repeat="usuario in listaUsuarios | filter:query | orderBy:orderProp | limitTo:5">
              <img id="{{usuario.id}}" src="{{usuario.img}}" class="thumbnail img-objetivos img-responsive magictime puffIn">
           </div>
         </div>
@@ -76,7 +78,7 @@
               <div class="intro-uno" ng-bind-html="textoAlgoritmo"></div>
             </div>
 
-            <div class="media" ng-repeat="res in resultadoAlgoritmo">
+            <div class="media" ng-repeat="res in resultadoAlgoritmo | filter:query | orderBy:orderProp | limitTo:6">
               <div class="media-left magictime puffIn">
                   <img class="media-object" src="{{res.img}}">
               </div>
@@ -91,7 +93,7 @@
       <div class="divide-pantalla"></div>
       <!-- box rigth -->
       <div class="box">
-        <div class="titulo-container"><h3>Objetivo confirmados</h3></div>
+        <div class="titulo-container"><h3>Objetivos confirmados</h3></div>
         <div class="monk"></div>
       <div class="objetivo-wrapper">
           <!-- Objetivo -->
@@ -99,7 +101,7 @@
             <div ng-show="!objetivos.length" class="intro-uno">
               <div class="intro-uno" ng-bind-html="textoObjetivos"></div>
             </div>
-            <div class="media" ng-repeat="blanco in objetivos">
+            <div class="media" ng-repeat="blanco in objetivos | filter:query | orderBy:orderProp | limitTo:5">
               <div class="media-left magictime puffIn">
                   <div class="objetivo-img">
                     <div class="objetivo-img-wrapper">
