@@ -229,6 +229,7 @@ angular.module('killmenos9App')
           var randNumber = Math.floor((Math.random() * $scope.objetivos.length  ) + 0);
           $scope.msg = '<p>KILL-9 OBJETIVO SELECIONADO <span>|</span></p>';
           var timeseleccionado = $timeout(function() {
+            $scope.objetivos[randNumber].eliminado ='eliminado' ;
             $scope.objetivos[randNumber].clase = 'blink eliminar';
           }, 5000);
           var timeseleccionado = $timeout(function() {

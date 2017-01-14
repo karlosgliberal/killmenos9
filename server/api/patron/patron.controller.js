@@ -12,7 +12,7 @@
 var Twit = require('twit');
 var _ = require('lodash');
 var sets = require('simplesets');
-var config  = require('../../config/killmenos9'); 
+var config  = require('../../config/killmenos9');
 
 var twitter = new Twit(config.twitter);
 var diccionario = config.diccionario;
@@ -33,6 +33,9 @@ exports.show = function(req, res){
   };
 
   twitter.get('search/tweets', params, function(err, data, resp){
+    if(err){
+      console.log(err);
+    }
     var datos = [];
     var tweets = data.statuses;
     var i = 0, len = tweets.length;
